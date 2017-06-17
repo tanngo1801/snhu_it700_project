@@ -1,0 +1,17 @@
+sidebar > div {
+  border-right: solid 4px brown;
+  padding: 0 0 0 50px; }
+
+section .ss-panel {
+  border: 1px dashed brown; }
+
+section .ss-panel a {
+  text-decoration: none;
+  color: black; }
+
+section .ss-panel #ss-top {
+  height: 250px; }
+
+section .ss-panel #ss-top img {
+  width: 100%;
+  height: 100%; }

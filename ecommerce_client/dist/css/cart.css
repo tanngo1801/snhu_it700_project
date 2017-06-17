@@ -1,0 +1,21 @@
+section {
+  padding: 5px; }
+
+section #cart > div {
+  height: 230px;
+  padding: 10px; }
+
+section #summary > div {
+  height: 300px;
+  padding: 10px;
+  border: #aaa solid 4px; }
+
+section #summary #paypal:hover {
+  display: inline-block;
+  opacity: .5; }
+
+section #cart #item {
+  border: 1px dashed brown;
+  margin-top: 2px; }
+  section #cart #item .ss-col-9 {
+    border-right: 1px dashed brown; }

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: shoes_shop
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: tanngo
+Implementation-Vendor-Id: com.dzui.shoesshop
+Build-Jdk: 1.8.0_131
+Implementation-URL: http://projects.spring.io/spring-boot/shoes_shop/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

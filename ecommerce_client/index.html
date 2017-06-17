@@ -1,0 +1,60 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="dist/css/common.css">
+
+	<head>
+		<title>Tan Shoes</title>
+	</head>
+
+	<body ng-app="ShoesShop">
+		<nav class="ss-navbar">
+			<div id="logo">
+				<a href="/"><img src="imgs/logo.png" width="50" height="50"></a>
+			</div>
+			<div id="menu-dropdown">
+				<img src="imgs/menu-dropdown.png" width="50" height="50">
+			</div>
+			<ul id="headings">
+				<li><a href="/"><img src="imgs/home-icon.png" width="15" height="15"></a></li>
+				<li><a href="#!/list?gender=men">Men</a></li>
+				<li><a href="#!/list?gender=women">Women</a></li>
+				<li><a href="#!/list?gender=boys">Boys</a></li>
+				<li><a href="#!/list?gender=girls">Girls</a></li>
+				<li id="cart"><a href="#!/cart"><img src="imgs/cart-icon.png" width="15" height="15"></a><span>0</span></li>
+			</ul>
+		</nav>
+		
+		<section>
+			<div ng-view></div>
+		</section>
+	
+		<footer>
+			<div id="address">
+				<ul>
+					<li>Street: 2500 North River Rd</li>
+					<li>City: Hooksett</li>
+					<li>State: New Hampshire</li>
+					<li>Zip Code: 03106</li>
+					<li>Email: tan.ngo@snhu.edu</li>
+					<li>Phone: 2674711066</li>
+				</ul>
+			</div>
+			<div id="media">
+				<ul>
+					<li><a href="#"><img src="imgs/facebook.png"></a></li>
+					<li><a href="#"><img src="imgs/google+.png"></a></li>
+					<li><a href="#"><img src="imgs/instagram.png"></a></li>
+				</ul>
+			</div>
+			<div id="copyright">
+				&copy tans.com, 2017
+			</div>
+		</footer>
+	</body>
+
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/ListController.js"></script>
+</html>
