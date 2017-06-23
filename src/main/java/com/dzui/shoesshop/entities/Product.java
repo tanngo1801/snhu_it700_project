@@ -1,11 +1,14 @@
 package com.dzui.shoesshop.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,6 +45,21 @@ public class Product {
 	@ManyToOne
     private Gender gender;
 	
+	@OneToMany(mappedBy="product")
+	private Set<ProductImage> images;
+	
+	public Set<ProductImage> getImages() {
+		return images;
+	}
+
+	public void setImages(Set<ProductImage> images) {
+		this.images = images;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -18,4 +18,8 @@ public class CustomerService {
 	public Customer update(Customer customer) {
 		return customer_repo.save(customer);
 	}
+	
+	public Customer create(Customer customer) {
+		return customer_repo.save(customer);
+	}
 }

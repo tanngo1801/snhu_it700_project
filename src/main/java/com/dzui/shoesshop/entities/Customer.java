@@ -32,6 +32,17 @@ public class Customer {
 	@Column
 	private String paymentCode;
 
+	@Column
+	private int addressId;
+	
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

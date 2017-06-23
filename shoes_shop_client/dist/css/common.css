@@ -72,11 +72,20 @@ section {
   float: right; }
 
 .ss-navbar #cart a {
-  padding: 0 0 0 20px; }
+  padding: 10px 20px; }
 
 .ss-navbar #cart span {
   font-size: 12px;
   color: red; }
+
+.ss-navbar #ss-search {
+  padding: 2px;
+  border-radius: 5px; }
+
+.ss-navbar #sign-in {
+  float: right;
+  padding: 10px;
+  margin: 10px; }
 
 @media (max-width: 992px) {
   .ss-navbar {
@@ -135,10 +144,25 @@ section {
 
 .ss-button-default,
 .ss-button-warning,
-.ss-button-danger {
+.ss-button-danger,
+.ss-button-default-fill,
+.ss-button-warning-fill,
+.ss-button-danger-fill {
   text-decoration: none;
   color: black;
   font-weight: bold; }
+
+.ss-button-default-fill {
+  background: black;
+  color: white; }
+
+.ss-button-warning-fill {
+  background: orange;
+  color: white; }
+
+.ss-button-danger-fill {
+  background: red;
+  color: white; }
 
 .ss-button-default {
   border: 2px black solid; }
@@ -149,9 +173,18 @@ section {
 .ss-button-danger {
   border: 2px red solid; }
 
-.ss-button-default, .ss-button-warning, .ss-button-danger, select.ss-form-input-default {
+.ss-button-default,
+.ss-button-warning,
+.ss-button-danger,
+.ss-button-default-fill,
+.ss-button-warning-fill,
+.ss-button-danger-fill {
   padding: 10px 40px;
+  cursor: pointer; }
+
+select.ss-form-input-default {
   background: white;
+  padding: 10px;
   cursor: pointer; }
 
 input.ss-form-input-default, textarea.ss-form-input-default {

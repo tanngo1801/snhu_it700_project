@@ -2,6 +2,11 @@
 
 <section>
 	<h2 id="success">Your order has been sent.</h2>
-	<p>All statuses of your order will be sent to abc@gmail.com</p>
+	<p>All statuses of your order will be sent to <span id="email"></span></p>
 	<h4><a href="/">Home page >>></a></h4>
 </section>
+
+<script type="text/javascript">
+	var email = window.location.href.split("?")[1].split("=")[1];
+	$("#email").text(email);
+</script>

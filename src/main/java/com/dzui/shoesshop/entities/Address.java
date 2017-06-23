@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,47 +12,67 @@ public class Address {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
-	@ManyToOne
-	@JoinColumn(name="customer_id")
-	private Customer customer;
-	
-	@Column
-	private String streetNumber;
-	
-	@Column
-	private int zipCode;
 
+	@Column
+	private String countryCode;
+	
+	@Column
+	private String city;
+	
+	@Column
+	private String line1;
+	
+	@Column
+	private String postalCode;
+	
+	@Column
+	private String state;
+	
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public String getStreetNumber() {
-		return this.streetNumber;
+	public String getCity() {
+		return city;
 	}
 
-	public void setStreetNumber(String streetNumber) {
-		this.streetNumber = streetNumber;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public int getZipCode() {
-		return this.zipCode;
+	public String getLine1() {
+		return line1;
 	}
 
-	public void setZipCode(int zipCode) {
-		this.zipCode = zipCode;
+	public void setLine1(String line1) {
+		this.line1 = line1;
 	}
 
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 }

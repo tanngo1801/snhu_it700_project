@@ -1,4 +1,4 @@
-var app = angular.module("ShoesShop", ["ngRoute", "ngCookies"]);
+var app = angular.module("ShoesShop", ["ngRoute", "ngSessionStorage", "ngCookies"]);
 
 app.constant("CONSTANTS", {
     SS_SERVER: "http://localhost:8080",
@@ -9,7 +9,8 @@ app.constant("CONSTANTS", {
 app.config(function($routeProvider) {
 	$routeProvider
     .when("/", {
-        templateUrl : "views/home.html"
+        templateUrl : "views/home.html",
+        controller: "HomeController"
     })
     .when("/list", {
         templateUrl : "views/list.html",
@@ -145,8 +146,27 @@ var NT_VALIDATOR = {
 		for(i = 0; i < numberInputs.length; i++) {
 			var item = $(numberInputs[i]);
 			var value = item.val();
+			var err_mess = item.attr("nt-validation-error-id");
+			var err_mess_obj = $("#" + err_mess);
 			if(isNaN(value)) {
 				err_mess_obj.text("Input must be a number");
+				err_mess_obj.show();
+				return false;
+			}
+			else {
+				
+			}
+		}
+
+		var emailInputs = form.find(".nt-input-email");
+		for(i = 0; i < emailInputs.length; i++) {
+			var item = $(emailInputs[i]);
+			var value = item.val();
+			var err_mess = item.attr("nt-validation-error-id");
+			var err_mess_obj = $("#" + err_mess);
+			var pattern = /(.+)@(.+){2,}\.(.+){2,}/;
+			if( !pattern.test(value) ) {
+				err_mess_obj.text("Input must be an email");
 				err_mess_obj.show();
 				return false;
 			}

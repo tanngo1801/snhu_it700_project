@@ -1,4 +1,4 @@
-app.controller("CartController", function($scope, $window, $location, Json_Helper, CONSTANTS, $cookies) {
+app.controller("CartController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $cookies) {
 	var order_details = [];
 
 	init();
@@ -86,10 +86,26 @@ app.controller("CartController", function($scope, $window, $location, Json_Helpe
             return actions.payment.execute().then(function(payment) {
             	if(payment.state === "approved") {
             		var order = {};
+            		var payer_info = {};
+            		var shipping_address = {};
+
             		order.status = payment.state;
             		order.paypal_id = payment.id;
             		order.created_at = payment.create_time;
             		order.amount = payment.transactions[0].amount.total;
+            		
+            		payer_info.email = payment.payer.payer_info.email;
+            		payer_info.first_name = payment.payer.payer_info.first_name;
+            		payer_info.last_name = payment.payer.payer_info.last_name;
+            		payer_info.payer_id = payment.payer.payer_info.payer_id;
+            		order.payer_info = JSON.stringify(payer_info);
+
+            		shipping_address.city = payment.payer.payer_info.shipping_address.city;
+            		shipping_address.country_code = payment.payer.payer_info.shipping_address.country_code;
+            		shipping_address.line1 = payment.payer.payer_info.shipping_address.line1;
+            		shipping_address.postal_code = payment.payer.payer_info.shipping_address.postal_code;
+            		shipping_address.state = payment.payer.payer_info.shipping_address.state;
+            		order.shipping_address = JSON.stringify(shipping_address);
 
             		var order_detail_array = [];
             		for(i = 0; i < order_details.length; i++) {
@@ -104,7 +120,7 @@ app.controller("CartController", function($scope, $window, $location, Json_Helpe
             		$.post(CONSTANTS.SS_SERVER + "/place-order", order, function(res) {
             			$cookies.remove("cart.tans.com");
             			$("#cart-status").text(0);
-            			$window.location.href = "#!/payment-succeeded";
+            			$window.location.href = "#!/payment-succeeded?email=" + payer_info.email;
             		});
             	}
             	else {

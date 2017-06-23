@@ -1,4 +1,4 @@
-var app = angular.module("ShoesShop", ["ngRoute", "ngCookies"]);
+var app = angular.module("ShoesShop", ["ngRoute", "ngSessionStorage", "ngCookies"]);
 
 app.constant("CONSTANTS", {
     SS_SERVER: "http://localhost:8080",
@@ -9,7 +9,8 @@ app.constant("CONSTANTS", {
 app.config(function($routeProvider) {
 	$routeProvider
     .when("/", {
-        templateUrl : "views/home.html"
+        templateUrl : "views/home.html",
+        controller: "HomeController"
     })
     .when("/list", {
         templateUrl : "views/list.html",

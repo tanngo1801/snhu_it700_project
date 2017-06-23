@@ -5,7 +5,7 @@
 			<div id="item" ng-repeat="item in order_details" ng-if="order_details !== undefined">
 				<div class="ss-col-9">
 					<div class="ss-col-6">
-						<img src="imgs/shoes_sample.jpg" width="200" height="200">
+						<img src="{{ item.product.images[0].url }}" width="200" height="200">
 					</div>
 					<div class="ss-col-6">
 						<h3>{{ item.name }}</h3>
@@ -33,7 +33,7 @@
 			<h4>Shipping: Free</h4>
 			<ln-dashed/>
 			<h2>Total: ${{ total }}</h2>
-			<div id="paypal-button"></div>
+			<div ng-show="{{order_details !== undefined}}" id="paypal-button"></div>
 			<p><button id="cancel" class="ss-button-danger ss-button-sm">Cancel</button></p>
 		</div> 
 	</div>

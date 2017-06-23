@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,9 +17,8 @@ public class Order {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@ManyToOne
-	@JoinColumn(name="customer_id")
-	private Customer customer;
+	@Column
+	private int customer_id;
 	
 	@ManyToOne
 	private Status status;
@@ -42,12 +40,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public Customer getCustomer() {
-		return this.customer;
+	public int getCustomer() {
+		return this.customer_id;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	public Status getStatus() {

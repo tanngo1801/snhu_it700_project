@@ -29,14 +29,6 @@ public class ProductImage {
 		this.id = id;
 	}
 
-	public Product getProducts() {
-		return this.product;
-	}
-
-	public void setProducts(Product product) {
-		this.product = product;
-	}
-
 	public String getUrl() {
 		return this.url;
 	}
