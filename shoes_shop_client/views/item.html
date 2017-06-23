@@ -1,35 +1,38 @@
+<link rel="stylesheet" type="text/css" href="dist/css/item.css">
+
 <div>
 	<div id="shoes-image" class="ss-col-6">
 		<img src="../imgs/shoes_sample.jpg">
 	</div>
 
-	<div id="shoes-details" class="ss-col-3">
-		<h2>Shoes Name</h2>
-		<h4><i>Shoes Brand</i></h4>
-		<h3>Price: $20.99</h3>
-		<div>
-			<h3>Color:</h3>
-			<select class="ss-form-input-default">
-				<option>Red</option>
-				<option>Red</option>
-				<option>Red</option>
-				<option>Red</option>
-			</select>
+	<form id="order">
+		<div id="shoes-details" class="ss-col-3">
+			<h2>{{ shoes.name }}</h2>
+			<h4><i>{{ shoes.brand.name }}</i></h4>
+			<h3>Price: {{ shoes.price }}</h3>
+			<h4>Color: {{ shoes.color }}</h4>
+			<h4>Gender: {{ shoes.gender.name }}</h4>
+			<h4>Size: {{ shoes.size }}</h4>
+			<div>
+				<span>Qty:</span>
+				<input ng-model="order.quantity" class="nt-input-required nt-input-range nt-input-number ss-form-input-default" nt-validation-error-id="quantity-error" nt-min="1" nt-max="100">
+				<h6 id="quantity-error" class="nt-validation-error"></h6>
+			</div>
 		</div>
-		<div>
-			<h3>Size:</h3>
-			<select class="ss-form-input-default">
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-				<option>8</option>
-			</select>
-		</div>
-	</div>
 
-	<div id="cart" class="ss-col-3">
-		<button class="ss-button-warning">Add to cart</button>
+		<div id="cart" class="ss-col-3">
+			<button id="submit" type="button" class="ss-button-warning">Add to cart</button>
+		</div>
+	</form>
+
+	<div class="ss-popup">
+		<h3>The item has been added to your cart.</h3>
+		<ln-dashed/>
 		<br><br>
-		<button class="ss-button-danger">Checkout Now</button>
+		<div>
+			<button id="checkout" class="ss-button-danger">Checkout</button>
+			<button id="continue-shopping" class="ss-button-default">Continue shopping</button>
+		</div>
 	</div>
 </div>
+

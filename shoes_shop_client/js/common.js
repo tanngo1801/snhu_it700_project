@@ -1,15 +1,31 @@
 $(document).ready(function() {
-	// Navbar
-	$(".ss-navbar #menu-dropdown").click(navbarCollapse);
+	init();
 
+	function init() {
+		navbarCollapse();
+		updateCartStatus();
+		popUpMessage();
+	}
 
-	function navbarCollapse(e) {
-		var list = $(e.target).parent().parent().find("ul");
-		if(list.hasClass("hidden")) {
-			list.removeClass("hidden");
+	function popUpMessage() {
+		$("#pop-up-message").hide();
+	}
+
+	function navbarCollapse() {
+		var menu_dropdown = $(".ss-navbar #menu-dropdown");
+		var list = menu_dropdown.parent().find("ul");
+	}
+
+	function updateCartStatus() {
+		var cart = document.cookie;
+
+		if(!cart) {
+			$("#cart-status").text(0);
 		}
 		else {
-			list.addClass("hidden");
+			cart = cart.split("=")[1];
+			var order_details = JSON.parse(cart);
+			$("#cart-status").text(order_details.length);
 		}
 	}
 });

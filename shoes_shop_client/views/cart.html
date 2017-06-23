@@ -2,85 +2,48 @@
 
 <section class="ss-row">
 	<div id="cart" class="ss-col-9">
-		<div id="item">
-			<div class="ss-col-9">
-				<div class="ss-col-6">
-					<img src="imgs/shoes_sample.jpg" width="200" height="200">
+			<div id="item" ng-repeat="item in order_details" ng-if="order_details !== undefined">
+				<div class="ss-col-9">
+					<div class="ss-col-6">
+						<img src="imgs/shoes_sample.jpg" width="200" height="200">
+					</div>
+					<div class="ss-col-6">
+						<h3>{{ item.name }}</h3>
+						<p>Gender: {{ item.product.gender.name }}</p>
+						<p>Size: {{ item.product.size }}</p>
+						<p>Color: {{ item.product.color }}</p>
+						<p>Qty: {{ item.quantity }}</p>
+					</div>
 				</div>
-				<div class="ss-col-6">
-					<h3>Shoes Name</h3>
-					<p>Gender: Men</p>
-					<p>Size: 9</p>
-					<p>Color: Tan</p>
-				</div>
-			</div>
-			<div class="ss-col-3">
-				<h4>Price: $24.99</h4>
-				<a href="#">Delete</a>
-			</div>
-		</div>
-		<div id="item">
-			<div class="ss-col-9">
-				<div class="ss-col-6">
-					<img src="imgs/shoes_sample.jpg" width="200" height="200">
-				</div>
-				<div class="ss-col-6">
-					<h3>Shoes Name</h3>
-					<p>Gender: Men</p>
-					<p>Size: 9</p>
-					<p>Color: Tan</p>
+				<div class="ss-col-3">
+					<h4>Unit price: ${{ item.product.price }}</h4>
+					<button ng-click="deleteItem($index)" class="delete ss-button-danger ss-button-sm" product-id="{{ $index }}">Delete</button>
 				</div>
 			</div>
-			<div class="ss-col-3">
-				<h4>Price: $24.99</h4>
-				<a href="#">Delete</a>
+			<div ng-if="order_details.length === undefined">
+				<h3>Cart empty!</h3>
+				<a href="/">Home page >>></a>
 			</div>
-		</div>
-		<div id="item">
-			<div class="ss-col-9">
-				<div class="ss-col-6">
-					<img src="imgs/shoes_sample.jpg" width="200" height="200">
-				</div>
-				<div class="ss-col-6">
-					<h3>Shoes Name</h3>
-					<p>Gender: Men</p>
-					<p>Size: 9</p>
-					<p>Color: Tan</p>
-				</div>
-			</div>
-			<div class="ss-col-3">
-				<h4>Price: $24.99</h4>
-				<a href="#">Delete</a>
-			</div>
-		</div>
-		<div id="item">
-			<div class="ss-col-9">
-				<div class="ss-col-6">
-					<img src="imgs/shoes_sample.jpg" width="200" height="200">
-				</div>
-				<div class="ss-col-6">
-					<h3>Shoes Name</h3>
-					<p>Gender: Men</p>
-					<p>Size: 9</p>
-					<p>Color: Tan</p>
-				</div>
-			</div>
-			<div class="ss-col-3">
-				<h4>Price: $24.99</h4>
-				<a href="#">Delete</a>
-			</div>
-		</div>
 	</div>
 
 	<div id="summary" class='ss-col-3'>
 		<div>
-			<h3>Subtotal: $24.99</h2>
+			<h3>Subtotal: ${{ total }}</h2>
 			<h4>Tax: Free</h4>
 			<h4>Shipping: Free</h4>
 			<ln-dashed/>
-			<h2>Total: $24.99</h2>
-			<a id="paypal" href="#"><img src="imgs/paypal-icon.png" width="200" height="50"></a>
-			<p><a href="#">Cancel</a></p>
+			<h2>Total: ${{ total }}</h2>
+			<div id="paypal-button"></div>
+			<p><button id="cancel" class="ss-button-danger ss-button-sm">Cancel</button></p>
+		</div> 
+	</div>
+
+	<div class="ss-popup">
+		<h3>Payment failed.</h3>
+		<ln-dashed/>
+		<br><br>
+		<div>
+			<button id="try-again" class="ss-button-default">Try again</button>
 		</div>
 	</div>
 </section>

@@ -14,10 +14,10 @@ public class Type {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-	@Column(name="name")
+	@Column
     private String name;
 	
-	@Column(name="description")
+	@Column
     private String description;
 	
 	public Integer getId() {

@@ -12,16 +12,16 @@ import javax.persistence.Table;
 public class Brand {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+	private Integer id;
+	
+	@Column
+	private String name;
+	
+	@Column
+	private String description;
 
-	@Column(name="name")
-    private String name;
-	
-	@Column(name="description")
-    private String description;
-	
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -29,7 +29,7 @@ public class Brand {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -37,7 +37,7 @@ public class Brand {
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {

@@ -9,6 +9,19 @@ ln-dashed {
 	display:block;
 }
 
+.ss-popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 200px;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px;
+	border: 1px dashed brown;
+	display: none;
+}
+
 body {
 	margin: 0;
 	min-width: 440px;

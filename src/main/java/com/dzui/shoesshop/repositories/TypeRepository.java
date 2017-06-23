@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.dzui.shoesshop.entities.Type;
 
-public interface TypeRepository extends CrudRepository<Type, Long> {
+public interface TypeRepository extends CrudRepository<Type, Integer> {
 	
 }

@@ -1,5 +1,6 @@
 <html>
 	<link rel="stylesheet" type="text/css" href="dist/css/common.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/nt-form-validation.css">
 
 	<head>
 		<title>Tan Shoes</title>
@@ -15,11 +16,11 @@
 			</div>
 			<ul id="headings">
 				<li><a href="/"><img src="imgs/home-icon.png" width="15" height="15"></a></li>
-				<li><a href="#!/list?gender=men">Men</a></li>
-				<li><a href="#!/list?gender=women">Women</a></li>
-				<li><a href="#!/list?gender=boys">Boys</a></li>
-				<li><a href="#!/list?gender=girls">Girls</a></li>
-				<li id="cart"><a href="#!/cart"><img src="imgs/cart-icon.png" width="15" height="15"></a><span>0</span></li>
+				<li><a href="#!/list?gender_id=1">Men</a></li>
+				<li><a href="#!/list?gender_id=2">Women</a></li>
+				<li><a href="#!/list?gender_id=3">Boys</a></li>
+				<li><a href="#!/list?gender_id=4">Girls</a></li>
+				<li id="cart"><a href="#!/cart"><img src="imgs/cart-icon.png" width="15" height="15"></a><span id="cart-status">0</span></li>
 			</ul>
 		</nav>
 		
@@ -54,7 +55,12 @@
 	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
 	<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script type="text/javascript" src="js/nt-form-validation.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/controllers/ListController.js"></script>
+	<script type="text/javascript" src="js/controllers/ItemController.js"></script>
+	<script type="text/javascript" src="js/controllers/CartController.js"></script>
 </html>

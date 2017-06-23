@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.dzui.shoesshop.entities.Brand;
 
-public interface BrandRepository extends CrudRepository<Brand, Long> {
+public interface BrandRepository extends CrudRepository<Brand, Integer> {
 
 }
