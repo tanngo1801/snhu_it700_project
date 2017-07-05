@@ -17,8 +17,8 @@ public class Order {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@Column
-	private int customer_id;
+	@ManyToOne
+	private Customer customer;
 	
 	@ManyToOne
 	private Status status;
@@ -40,12 +40,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public int getCustomer() {
-		return this.customer_id;
+	public Customer getCustomer() {
+		return this.customer;
 	}
 
-	public void setCustomer(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Status getStatus() {

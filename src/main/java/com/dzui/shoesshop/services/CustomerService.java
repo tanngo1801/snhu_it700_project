@@ -15,6 +15,10 @@ public class CustomerService {
 		return customer_repo.findByEmail(email);
 	}
 	
+	public Customer findById(int id) {
+		return customer_repo.findOne(id);
+	}
+	
 	public Customer update(Customer customer) {
 		return customer_repo.save(customer);
 	}

@@ -25,7 +25,7 @@ public class Product {
     private String color;
 	
 	@Column(name="size")
-    private int size;
+    private float size;
 	
 	@Column(name="stock")
     private int stock;
@@ -56,10 +56,6 @@ public class Product {
 		this.images = images;
 	}
 
-	public void setType(Type type) {
-		this.type = type;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -84,11 +80,11 @@ public class Product {
 		this.color = color;
 	}
 
-	public int getSize() {
+	public float getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(float size) {
 		this.size = size;
 	}
 
@@ -120,7 +116,7 @@ public class Product {
 		return type;
 	}
 
-	public void setType_id(Type type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 

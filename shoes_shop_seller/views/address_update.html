@@ -1,0 +1,63 @@
+<form id="update-address">
+	<table>
+		<tr>
+			<td>
+				<label for="countryCode">Country Code:</label>
+			</td>
+			<td>
+				<input id="countryCode" class="nt-input-required" nt-validation-error-id="ss-countryCode-error" type="text" ng-model="address.countryCode">
+			</td>
+			<td>
+				<p id="ss-countryCode-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="city">City:</label>
+			</td>
+			<td>
+				<input id="city" class="nt-input-required" nt-validation-error-id="ss-city-error" type="text" ng-model="address.city">
+			</td>
+			<td>
+				<p id="ss-city-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="line1">Street Number:</label>
+			</td>
+			<td>
+				<input id="line1" class="nt-input-required" nt-validation-error-id="ss-line1-error" type="text" ng-model="address.line1">
+			</td>
+			<td>
+				<p id="ss-line1-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="postalCode">Postal Code:</label>
+			</td>
+			<td>
+				<input id="postalCode" class="nt-input-required" nt-validation-error-id="ss-postalCode-error" type="text" ng-model="address.postalCode">
+			</td>
+			<td>
+				<p id="ss-postalCode-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="state">State:</label>
+			</td>
+			<td>
+				<input id="state" class="nt-input-required" nt-validation-error-id="ss-state-error" type="text" ng-model="address.state" placeholder="e.g NH, NY, PA, CA, ...">
+			</td>
+			<td>
+				<p id="ss-state-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="update">Update</button></td>
+		</tr>
+	</table>
+</form>

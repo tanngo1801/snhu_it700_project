@@ -1,6 +1,7 @@
 package com.dzui.shoesshop.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dzui.shoesshop.entities.Product;
 import com.dzui.shoesshop.repositories.ProductRepository;
@@ -23,12 +25,36 @@ public class ProductService {
 	@Autowired
 	private ProductRepository product_repo;
 	
+	public Product create(Product product) {
+		return product_repo.save(product);
+	}
+	
+	public Product update(Product product) {
+		return product_repo.save(product);
+	}
+	
 	public Product findById(int id) {
 		return product_repo.findOne(id);
 	}
 	
-	public List<Product> filterShoes(Map<String, String> params) {
+	public void delete(int id) {
+		product_repo.delete(id);
+	}
+	
+	public Map<Object, Object> filterShoes(@RequestParam Map<String, String> params) {
+		Map<Object, Object> result = new HashMap<>();
 		List<Product> shoes = new ArrayList<>();
+		int page = 0, itemsPerPage = 10;
+		
+		// Pagination
+		if(params.containsKey("page")) {
+			page = Integer.parseInt(params.get("page"));
+			params.remove("page");
+		}
+		if(params.containsKey("itemsPerPage")) {
+			itemsPerPage = Integer.parseInt(params.get("itemsPerPage"));
+			params.remove("itemsPerPage");
+		}
 		
 		String conditions = "";
 		Iterator<Map.Entry<String, String>> it = params.entrySet().iterator();
@@ -45,6 +71,7 @@ public class ProductService {
 			else {
 				conditions += entry.getKey() + "=" + ":" + entry.getKey();
 			}
+			
 			if(it.hasNext()) {
 				conditions += " and ";
 			}
@@ -52,7 +79,6 @@ public class ProductService {
 				conditions += " ";
 			}
 		}
-
 
 		String query_string = "select p from Product p ";
 		if(params.size() != 0) {
@@ -70,11 +96,21 @@ public class ProductService {
 			else {
 				query.setParameter(entry.getKey(), entry.getValue());
 			}
-			
 		}
 		
+		// Get total page
+		int maxResults = query.getResultList().size();
+		int maxPage = maxResults/itemsPerPage;
+		
+		// Pagination
+		query.setFirstResult(page*itemsPerPage);
+		query.setMaxResults(itemsPerPage);
 		shoes = query.getResultList();
 		
-		return shoes;
+		// Prepare response
+		result.put("maxPage", maxPage);
+		result.put("shoes", shoes);
+		
+		return result;
 	}
 }

@@ -1,0 +1,59 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="dist/css/common.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/nt-form-validation.css">
+
+	<head>
+		<title>Tan Shoes</title>
+	</head>
+
+	<body ng-app="ShoesShop">
+		<nav class="ss-navbar">
+			<a href="/"><img src="imgs/logo.png"></a>
+<!-- 			<div id="menu-dropdown">
+				<img src="imgs/menu-dropdown.png" width="50" height="50">
+			</div> -->
+			<ul id="headings">
+				<li><a href="#!/list?gender_id=1">Log out</a></li>
+			</ul>
+		</nav>
+		
+		<sidebar>
+			<ul id="resources">
+				<li><a href="#"><img class="ss-icon" src="imgs/home-icon.png"> home</a></li>
+				<li><a href="#!/product/list"><img class="ss-icon" src="imgs/shoes-icon.png"> products</a></li>
+				<li><a href="#!/order/list"><img class="ss-icon" src="imgs/order-icon.png"> orders</a></li>
+				<li><a href="#!/brand/list"><img class="ss-icon" src="imgs/brand-icon.png"> brands</a></li>
+				<li><a href="#!/gender/list"><img class="ss-icon" src="imgs/gender-icon.png"> genders</a></li>
+				<li><a href="#!/style/list"><img class="ss-icon" src="imgs/style-icon.png"> styles</a></li>
+			</ul>
+		</sidebar>
+
+		<section>
+			<div ng-view></div>
+		</section>
+	
+		<footer>
+			<div id="copyright">
+				&copy tans.com, 2017
+			</div>
+		</footer>
+	</body>
+
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-sessionstorage/angular-sessionstorage.js"></script>
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script type="text/javascript" src="js/nt-form-validation.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/ProductController.js"></script>
+	<script type="text/javascript" src="js/controllers/BrandController.js"></script>
+	<script type="text/javascript" src="js/controllers/GenderController.js"></script>
+	<script type="text/javascript" src="js/controllers/StyleController.js"></script>
+	<script type="text/javascript" src="js/controllers/OrderController.js"></script>
+	<script type="text/javascript" src="js/controllers/CustomerController.js"></script>
+	<script type="text/javascript" src="js/controllers/AddressController.js"></script>
+	<script type="text/javascript" src="js/controllers/AuthenticationController.js"></script>
+</html>

@@ -1,0 +1,125 @@
+<link rel="stylesheet" type="text/css" href="dist/css/products.css">
+
+<form id="create-product">
+	<table>
+		<tr>
+			<td>
+				<label for="name">Name:</label>
+			</td>
+			<td>
+				<input id="name" class="nt-input-required" nt-validation-error-id="ss-name-error" type="text" ng-model="product.name">
+			</td>
+			<td>
+				<p id="ss-name-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="color">Color:</label>
+			</td>
+			<td>
+				<input id="color" class="nt-input-required" nt-validation-error-id="ss-color-error" type="text" ng-model="product.color">
+			</td>
+			<td>
+				<p id="ss-color-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="type">Style:</label>
+			</td>
+			<td>
+				<select id="type" class="nt-input-required" nt-validation-error-id="ss-type-error" ng-model="product.type">
+					<option value>--- Select Style ---</option>
+					<option ng-repeat="style in styles" value="{{ style.id }}">{{ style.name }}</option>
+				</select>
+			</td>
+			<td>
+				<p id="ss-type-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="gender">Gender:</label>
+			</td>
+			<td>
+				<select id="gender" class="nt-input-required" nt-validation-error-id="ss-gender-error" ng-model="product.gender">
+					<option value>--- Select Gender ---</option>
+					<option ng-repeat="gender in genders" value="{{ gender.id }}">{{ gender.name }}</option>
+				</select>
+			</td>
+			<td>
+				<p id="ss-gender-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="size">Size:</label>
+			</td>
+			<td>
+				<select id="size" class="nt-input-required" nt-validation-error-id="ss-size-error" ng-model="product.size">
+					<option value>--- Select Size ---</option>
+					<option ng-repeat="size in sizes" value="{{ size }}">{{ size }}</option>
+				</select>
+			</td>
+			<td>
+				<p id="ss-size-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="brand">Brand:</label>
+			</td>
+			<td>
+				<select id="brand" class="nt-input-required" nt-validation-error-id="ss-brand-error" ng-model="product.brand">
+					<option value>--- Select Brand ---</option>
+					<option ng-repeat="brand in brands" value="{{ brand.id }}">{{ brand.name }}</option>
+				</select>
+			</td>
+			<td>
+				<p id="ss-brand-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="stock">Stock:</label>
+			</td>
+			<td>
+				<input id="stock" class="nt-input-required nt-input-range nt-input-integer" nt-min="0" nt-max="10000" nt-validation-error-id="ss-stock-error" type="text" ng-model="product.stock">
+			</td>
+			<td>
+				<p id="ss-stock-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="price">Price:</label>
+			</td>
+			<td>
+				<input id="price" class="nt-input-required nt-input-range nt-input-number" nt-min="0" nt-max="10000" nt-validation-error-id="ss-price-error" type="text" ng-model="product.price">
+			</td>
+			<td>
+				<p id="ss-price-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="activated">Activated:</label>
+			</td>
+			<td>
+				<select id="activated" class="nt-input-required" ng-model="product.activated" nt-validation-error-id="ss-activated-error">
+					<option value>--- Select Activated ---</option>
+					<option value="true">True</option>
+					<option value="false">False</option>
+				</select>
+			</td>
+			<td>
+				<p id="ss-activated-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="create">Create</button></td>
+		</tr>
+	</table>
+</form>

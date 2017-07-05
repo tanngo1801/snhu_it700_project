@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dzui.shoesshop.entities.Brand;
 import com.dzui.shoesshop.entities.Gender;
+import com.dzui.shoesshop.entities.Status;
 import com.dzui.shoesshop.entities.Type;
 import com.dzui.shoesshop.services.BrandService;
 import com.dzui.shoesshop.services.GenderService;
+import com.dzui.shoesshop.services.StatusService;
 import com.dzui.shoesshop.services.TypeService;
 
 @CrossOrigin(origins = "http://localhost:8888")
@@ -25,6 +27,9 @@ public class MasterDataController {
 	
 	@Autowired
 	GenderService gender_service;
+	
+	@Autowired
+	StatusService status_service;
 	
 	@GetMapping("ajax-get-brands")
 	public List<Brand> ajaxGetBrands() {
@@ -42,5 +47,10 @@ public class MasterDataController {
 	public List<Gender> ajaxGetGenders() {
 		List<Gender> genders = gender_service.findAll();	
 		return genders;
+	}
+	
+	@GetMapping("ajax-get-statuses")
+	public List<Status> ajaxGetStatuses() {
+		return status_service.findAll();
 	}
 }

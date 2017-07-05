@@ -85,7 +85,7 @@ public class ItemController {
 		order.setAmount(Float.parseFloat(params.get("amount")));
 		order.setPaypalId(params.get("paypal_id"));
 		order.setStatus(status_service.findByName(params.get("status")));
-		order.setCustomer(customer.getId());
+		order.setCustomer(customer);
 		order = order_service.create(order);
 		
 		JSONParser parser = new JSONParser();

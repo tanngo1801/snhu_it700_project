@@ -1,0 +1,30 @@
+<form id="create-gender">
+	<table>
+		<tr>
+			<td>
+				<label for="name">Name:</label>
+			</td>
+			<td>
+				<input id="name" class="nt-input-required" nt-validation-error-id="ss-name-error" type="text" ng-model="gender.name">
+			</td>
+			<td>
+				<p id="ss-name-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="color">Description:</label>
+			</td>
+			<td>
+				<input id="color" class="" nt-validation-error-id="ss-color-error" type="text" ng-model="gender.description">
+			</td>
+			<td>
+				<p id="ss-description-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="create">Create</button></td>
+		</tr>
+	</table>
+</form>

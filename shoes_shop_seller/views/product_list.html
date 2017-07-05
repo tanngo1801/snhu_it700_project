@@ -1,0 +1,39 @@
+<dir>
+	<a href="#!/product/create">+ ADD ...</a>
+	<table id="data">
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+			<th>Color</th>
+			<th>Type ID</th>
+			<th>Brand ID</th>
+			<th>Gender ID</th>
+			<th>Size</th>
+			<th>Stock</th>
+			<th>Price</th>
+			<th>Activated</th>
+			<th>Actions</th>
+		</tr>
+		<tr ng-repeat="item in shoes">
+			<td>{{ item.id }}</td>
+			<td>{{ item.name }}</td>
+			<td>{{ item.color }}</td>
+			<td>{{ item.type.name }}</td>
+			<td>{{ item.brand.name }}</td>
+			<td>{{ item.gender.name }}</td>
+			<td>{{ item.size }}</td>
+			<td>{{ item.stock }}</td>
+			<td>${{ item.price }}</td>
+			<td>{{ item.activated }}</td>
+			<td>
+				<button id="item-{{ item.id }}" class="delete" ng-click="productDelete($event)">Delete</button>
+				<a href="#!/product/update/{{ item.id }}">Update</a>
+			</td>
+		</tr>
+	</table>
+	<div class="ss-pagination">
+		<p>Total page: <span>{{ maxPage }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
+		<p><button id="back"><<< Back</button> | <button id="next">Next >>></button></p>
+		<p>Go to page: <input id="page" ng-model="page" ng-init="page=0" type="text" name="" size="1"><input id="page-button" type="button" value="Go"></p>
+	</div>
+</dir>

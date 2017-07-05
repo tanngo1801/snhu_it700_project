@@ -1,0 +1,116 @@
+body {
+	margin: 0;
+}
+
+table td {
+	padding: 5px;
+}
+
+.ss-navbar {
+	background: black;
+	/*position: fixed;*/
+}
+.ss-navbar #logo {
+	display: inline-block;
+}
+.ss-navbar a {
+	display: inline-block;
+}
+.ss-navbar img {
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+}
+.ss-navbar #headings {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	line-height: 40px;
+	vertical-align: middle;
+	float: right;
+	a {
+		color: white;
+		text-decoration: none;
+		font-weight: bolder;
+	}
+	a:hover {
+		color: #aaa;
+	}
+}
+.ss-navbar #headings li {
+	display: inline-block;
+	margin: 0 20px;
+}
+
+sidebar {
+	position: fixed;
+	height: 100%;
+	background: black;
+	width: 20%;
+	border-top: 2px white solid;
+	color: white;
+
+	#resources {
+		list-style-type: square;
+		li {
+			padding: 10px;
+			border-bottom: 1px white dotted;
+			a {
+				text-decoration: none;
+				color: white;
+				font-weight: bold;
+				font-size: 20px;
+			}
+			a:hover {
+				color: #aaa;
+			}
+		}
+	}
+}
+
+.ss-icon {
+	width: 15px;
+	height: 15px;
+}
+
+.ss-row {
+	width: 100%;
+	padding: 10px 0;
+	display: inline-block;
+}
+.ss-col-6 {
+	padding: 1%;
+	width: 48%;
+	float: left;
+}
+.ss-col-3 {
+	padding: 1%;
+	width: 23%;
+	float: left;
+}
+.ss-col-9 {
+	padding: 1%;
+	width: 72%;
+	float: left;
+}
+@media (max-width: 992px) {
+	.ss-col-6, .ss-col-3, .ss-col-9 {
+		width: 100%;
+		float: none;
+	}
+}
+
+section {
+	display: inline-block;
+	width: 80%;
+	min-width: 80%;
+	position: fixed;
+	margin-left: 20%;
+	background: #eee;
+	height: 100%;
+	overflow: scroll;
+	table-layout: fixed;
+	form {
+		padding: 20px;
+	}
+}

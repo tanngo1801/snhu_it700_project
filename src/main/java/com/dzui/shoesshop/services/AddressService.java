@@ -14,4 +14,12 @@ public class AddressService {
 	public Address create(Address address) {
 		return address_repo.save(address);
 	}
+	
+	public Address findById(int id) {
+		return address_repo.findOne(id);
+	}
+	
+	public Address update(Address address) {
+		return address_repo.save(address);
+	}
 }

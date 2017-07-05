@@ -77,7 +77,7 @@ app.controller("ListController", function($scope, $window, $location, Json_Helpe
 			filter_inputs = url.substring(url.indexOf("?")+1);
 		}
 		$.get(CONSTANTS.SS_SERVER + "/filter-shoes?" + filter_inputs, function(res) {
-			$scope.shoes = res;
+			$scope.shoes = res.shoes;
 			$scope.$digest();
 		});
 	}
