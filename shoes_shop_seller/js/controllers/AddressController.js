@@ -1,4 +1,4 @@
-app.controller("AddressController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("AddressController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Addresss
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -8,10 +8,16 @@ app.controller("AddressController", function($scope, $window, $location, $sessio
 
 	function loadAddress() {
 		var id = $routeParams.id;
-		$.get(CONSTANTS.SS_SERVER + "/api/v1/address/update/" + id, function(res) {
-			console.log(res);
-			$scope.address = res;
-			$scope.$digest();
+		$.ajax({
+			method: "GET",
+			url: CONSTANTS.SS_SERVER + "/api/v1/address/update/" + id, 
+			headers: {
+				"Authorization":$cookies.get("jwtToken")
+			},
+			success: function(res) {
+				$scope.address = res;
+				$scope.$digest();
+			}
 		});
 	}
 
@@ -22,7 +28,10 @@ app.controller("AddressController", function($scope, $window, $location, $sessio
 			$.ajax({
 				method: "PUT",
 				url: CONSTANTS.SS_SERVER + "/api/v1/address/update/" + id, 
-				data: $scope.address, 
+				data: $scope.address,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					alert("Item updated suscessfully.");
 					location.reload();

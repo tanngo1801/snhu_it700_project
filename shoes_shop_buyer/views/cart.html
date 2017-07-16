@@ -1,31 +1,32 @@
-<link rel="stylesheet" type="text/css" href="dist/css/cart.css">
+<link rel="stylesheet" type="text/css" href="dist/css/cart.css"/>
 
+<h1>Your Cart:</h1>
 <section class="ss-row">
-	<div id="cart" class="ss-col-9">
-			<div id="item" ng-repeat="item in order_details" ng-if="order_details !== undefined">
-				<div class="ss-col-9">
-					<div class="ss-col-6">
-						<img src="{{ item.product.images[0].url }}" width="200" height="200">
-					</div>
-					<div class="ss-col-6">
-						<h3>{{ item.name }}</h3>
-						<p>Gender: {{ item.product.gender.name }}</p>
-						<p>Size: {{ item.product.size }}</p>
-						<p>Color: {{ item.product.color }}</p>
-						<p>Qty: {{ item.quantity }}</p>
-					</div>
+	<form id="cart-items" class="ss-col-9">
+		<div id="item" ng-repeat="item in order_details" ng-if="order_details !== undefined">
+			<div class="ss-col-9">
+				<div class="ss-col-6">
+					<img src="{{ item.product.images[0].url ? item.product.images[0].url : 'imgs/sample-fault.png' }}" width="200" height="200">
 				</div>
-				<div class="ss-col-3">
-					<h4>Unit price: ${{ item.product.price }}</h4>
-					<button ng-click="deleteItem($index)" class="delete ss-button-danger ss-button-sm" product-id="{{ $index }}">Delete</button>
+				<div class="ss-col-6">
+					<h3>{{ item.name }}</h3>
+					<p>Gender: {{ item.product.gender.name }}</p>
+					<p>Size: {{ item.product.size }}</p>
+					<p>Color: {{ item.product.color }}</p>
+					<p>Qty: <input ng-blur="updateQuantity($event)" class="nt-input-required nt-input-integer nt-input-range" nt-min="1" nt-max="{{ item.product.stock }}" type="text" value="{{ item.quantity }}" size="3" nt-validation-error-id="quantity-error-{{ $index }}" index="{{ $index }}"></p>
+					<h6 id="quantity-error-{{ $index }}" class="nt-validation-error"></h6>
 				</div>
 			</div>
-			<div ng-if="order_details.length === undefined">
-				<h3>Cart empty!</h3>
-				<a href="/">Home page >>></a>
+			<div class="ss-col-3">
+				<h4>Unit price: ${{ item.product.price }}</h4>
+				<button ng-click="deleteItem($index)" class="delete ss-button-danger ss-button-sm" product-id="{{ $index }}">Delete</button>
 			</div>
-	</div>
-
+		</div>
+		<div ng-if="order_details.length === undefined">
+			<h3>Cart empty!</h3>
+			<a href="/">Home page >>></a>
+		</div>
+	</form>
 	<div id="summary" class='ss-col-3'>
 		<div>
 			<h3>Subtotal: ${{ total }}</h2>

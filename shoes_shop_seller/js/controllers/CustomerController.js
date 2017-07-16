@@ -1,4 +1,4 @@
-app.controller("CustomerController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("CustomerController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Customers
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -8,10 +8,16 @@ app.controller("CustomerController", function($scope, $window, $location, $sessi
 
 	function loadCustomer() {
 		var id = $routeParams.id;
-		$.get(CONSTANTS.SS_SERVER + "/api/v1/customer/update/" + id, function(res) {
-			console.log(res);
-			$scope.customer = res;
-			$scope.$digest();
+		$.ajax({
+			method: "GET",
+			url: CONSTANTS.SS_SERVER + "/api/v1/customer/update/" + id, 
+			headers: {
+				"Authorization":$cookies.get("jwtToken")
+			},
+			success: function(res) {
+				$scope.customer = res;
+				$scope.$digest();
+			}
 		});
 	}
 
@@ -22,7 +28,10 @@ app.controller("CustomerController", function($scope, $window, $location, $sessi
 			$.ajax({
 				method: "PUT",
 				url: CONSTANTS.SS_SERVER + "/api/v1/customer/update/" + id, 
-				data: $scope.customer, 
+				data: $scope.customer,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					alert("Item updated suscessfully.");
 					location.reload();

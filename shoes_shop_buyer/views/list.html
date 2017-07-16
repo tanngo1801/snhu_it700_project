@@ -2,6 +2,8 @@
 
 <div>
 	<div class="ss-row">
+		<label for="sort"><span id="sort-button">Filter</span></label>
+		<input id="sort" type="checkbox">
 		<sidebar class="ss-col-3">
 			<form id="filter">
 				<div id="gender" class="ss-row">
@@ -27,8 +29,11 @@
 				</div>
 				<div id="Price" class="ss-row">
 					<h3>Price:</h3>
-					<input type="text" id="pmin" ng-model="filter.pmin" class="ss-form-input-default" name="pmin" placeholder="Min price">
-					<input type="text" id="pmax" ng-model="filter.pmax" class="ss-form-input-default" name="pmax" placeholder="Max price">
+					<input type="text" id="pmin" ng-model="filter.pmin" nt-validation-error-id="price-error" class="ss-form-input-default nt-input-range nt-input-number" nt-min="0" nt-max="10000" name="pmin" placeholder="Min price">
+					<input type="text" id="pmax" ng-model="filter.pmax" nt-validation-error-id="price-error" class="ss-form-input-default nt-input-range nt-input-number" nt-min="0" nt-max="10000"name="pmax" placeholder="Max price">
+					<button class="ss-button-default ss-button-sm">Go</button>
+					<h6 id="price-error" class="nt-validation-error"></h6>
+					
 				</div>
 				<div id="Brand" class="ss-row">
 					<h3>Brand:</h3>
@@ -41,22 +46,36 @@
 		</sidebar>
 
 		<section class="ss-col-9">
-			<div ng-repeat="item in shoes" class="ss-col-3">
-				<div class="ss-panel">
-					<a href="#!/item?id={{ item.id }}">
-						<div id="ss-top">
-							<img src="{{ item.images[0].url }}" width="100%" height="">
-						</div>
-						<br>
-						<ln-dashed/>
-						<div id="ss-content">
-							<h4>{{ item.name }}</h4>
-							<p>{{ item.brand.name }}</p>
-							<h4>{{ item.price }}</h4>
-							<h6>{{ item.gender.name }} | {{ item.color }} | Avail: {{ item.stock }}</h6>
-						</div>
-					</a>
+			<div ng-if="shoes.length!=0">
+				<div ng-repeat="item in shoes" class="ss-col-3">
+					<div class="ss-panel">
+						<a href="#!/item?id={{ item.id }}">
+							<div id="ss-top">
+								<img src="{{ item.images[0].url ? item.images[0].url : 'imgs/sample-fault.png' }}" width="100%">
+							</div>
+							<br>
+							<ln-dashed/>
+							<div id="ss-content">
+								<h4>{{ item.name }}</h4>
+								<p>{{ item.brand.name }}</p>
+								<h4>{{ item.price }}</h4>
+								<h6>{{ item.gender.name }} | {{ item.color }} | Avail: {{ item.stock }}</h6>
+							</div>
+						</a>
+					</div>
 				</div>
+			</div>
+			<div ng-if="shoes.length==0">
+				<div id="empty">
+					No Record Found!!!
+				</div>
+			</div>
+
+			<ln-dashed />
+			<div class="ss-pagination">
+				<p>Total page: <span>{{ maxPage + 1 }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
+				<p><button id="back"><<< Back</button> | <button id="next">Next >>></button></p>
+				<p>Go to page: <input id="page" ng-model="page" ng-init="page=0" type="text" name="" size="5"><input id="page-button" type="button" value="Go"></p>
 			</div>
 		</section>
 	</div>

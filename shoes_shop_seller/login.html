@@ -1,0 +1,65 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="dist/css/nt-form-validation.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/authentication.css">
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="Tans Shoes Shop | Online Buy Shoes">
+		<meta name="keywords" content="Shoes, Cheap, Online, Tans, Shop">
+		<meta name="author" content="Tan Ngo">
+
+		<title>Tans Login | Shoes Shop</title>
+	</head>
+
+	<body ng-app="ShoesShop">
+		<table id="container" ng-controller="AuthenticationController">
+			<form id="login-form">
+				<tr>
+					<td colspan="2"><h3>Please sign-in to access</h3></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<h6 id="signin-error" class="nt-validation-error"></h6>
+					</td>
+				</tr>
+				<tr>
+					<td class="ss-col-6">
+						<label for="username">Username</label>
+					</td>
+					<td class="ss-col-6">
+						<input id="username" class="nt-input-required" nt-validation-error-id="signin-error" type="text" ng-model="user.username">
+					</td>
+				</tr>
+				<tr>
+					<td class="ss-col-6">
+						<label>Password</label>
+					</td>
+					<td class="ss-col-6">
+						<input id="password" class="nt-input-required" nt-validation-error-id="signin-error" type="password" ng-model="user.password">
+					</td>
+				</tr>
+				<tr>
+					<td class="ss-col-6">
+						
+					</td>
+					<td class="ss-col-6">
+						<button id="signin">Sign in</button>
+					</td>
+				</tr>
+			</form>
+		</table>
+	</body>
+
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-sessionstorage/angular-sessionstorage.js"></script>
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script type="text/javascript" src="js/nt-form-validation.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/AuthenticationController.js"></script>
+</html>

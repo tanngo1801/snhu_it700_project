@@ -3,28 +3,32 @@
 	<link rel="stylesheet" type="text/css" href="dist/css/nt-form-validation.css">
 
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="Tans Shoes Shop | Online Buy Shoes">
+		<meta name="keywords" content="Shoes, Cheap, Online, Tans, Shop">
+		<meta name="author" content="Tan Ngo">
+	
 		<title>Tan Shoes</title>
 	</head>
 
 	<body ng-app="ShoesShop">
 		<nav class="ss-navbar">
 			<a href="/"><img src="imgs/logo.png"></a>
-<!-- 			<div id="menu-dropdown">
-				<img src="imgs/menu-dropdown.png" width="50" height="50">
-			</div> -->
 			<ul id="headings">
-				<li><a href="#!/list?gender_id=1">Log out</a></li>
+				<li><a href="/login.html">Log out</a></li>
 			</ul>
 		</nav>
 		
 		<sidebar>
 			<ul id="resources">
-				<li><a href="#"><img class="ss-icon" src="imgs/home-icon.png"> home</a></li>
-				<li><a href="#!/product/list"><img class="ss-icon" src="imgs/shoes-icon.png"> products</a></li>
-				<li><a href="#!/order/list"><img class="ss-icon" src="imgs/order-icon.png"> orders</a></li>
-				<li><a href="#!/brand/list"><img class="ss-icon" src="imgs/brand-icon.png"> brands</a></li>
-				<li><a href="#!/gender/list"><img class="ss-icon" src="imgs/gender-icon.png"> genders</a></li>
-				<li><a href="#!/style/list"><img class="ss-icon" src="imgs/style-icon.png"> styles</a></li>
+				<li><a href="#"><img class="ss-icon" src="imgs/home-icon.png"> <span>home</span></a></li>
+				<li><a href="#!/product/list"><img class="ss-icon" src="imgs/shoes-icon.png"> <span>products</span></a></li>
+				<li><a href="#!/order/list"><img class="ss-icon" src="imgs/order-icon.png"> <span>orders</span></a></li>
+				<li><a href="#!/brand/list"><img class="ss-icon" src="imgs/brand-icon.png"> <span>brands</span></a></li>
+				<li><a href="#!/gender/list"><img class="ss-icon" src="imgs/gender-icon.png"> <span>genders</span></a></li>
+				<li><a href="#!/style/list"><img class="ss-icon" src="imgs/style-icon.png"> <span>styles</span></a></li>
+				<li><a href="#!/question/list"><img class="ss-icon" src="imgs/question-icon.png"> <span>Q&A</span></a></li>
 			</ul>
 		</sidebar>
 
@@ -55,5 +59,6 @@
 	<script type="text/javascript" src="js/controllers/OrderController.js"></script>
 	<script type="text/javascript" src="js/controllers/CustomerController.js"></script>
 	<script type="text/javascript" src="js/controllers/AddressController.js"></script>
-	<script type="text/javascript" src="js/controllers/AuthenticationController.js"></script>
+	<script type="text/javascript" src="js/controllers/QuestionController.js"></script>
+	<script type="text/javascript" src="js/controllers/HomeController.js"></script>
 </html>

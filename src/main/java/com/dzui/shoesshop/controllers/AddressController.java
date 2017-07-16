@@ -11,17 +11,17 @@ import com.dzui.shoesshop.entities.Address;
 import com.dzui.shoesshop.services.AddressService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class AddressController {
 	@Autowired
 	private AddressService address_service;
-	
-	@RequestMapping(method=RequestMethod.GET, value="/api/v1/address/update/{id}")
-	public Address findAddressById(@PathVariable(value="id") int id) {
+
+	@RequestMapping(method = RequestMethod.GET, value = "/api/v1/address/update/{id}")
+	public Address findAddressById(@PathVariable(value = "id") int id) {
 		return address_service.findById(id);
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT, value="/api/v1/address/update/{id}")
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/api/v1/address/update/{id}")
 	public Address AddressUpdate(Address address) {
 		return address_service.update(address);
 	}

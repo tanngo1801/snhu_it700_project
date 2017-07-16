@@ -44,7 +44,7 @@ public class ProductService {
 	public Map<Object, Object> filterShoes(@RequestParam Map<String, String> params) {
 		Map<Object, Object> result = new HashMap<>();
 		List<Product> shoes = new ArrayList<>();
-		int page = 0, itemsPerPage = 10;
+		int page = 0, itemsPerPage = 12;
 		
 		// Pagination
 		if(params.containsKey("page")) {
@@ -79,11 +79,14 @@ public class ProductService {
 				conditions += " ";
 			}
 		}
-
-		String query_string = "select p from Product p ";
+		
+		System.out.println(conditions);
+		String query_string = "select p from Product p where stock>0 and activated=1 ";
 		if(params.size() != 0) {
-			query_string += "where " + conditions + " ";
+			query_string += "and " + conditions + " ";
 		}
+		
+		// Order by datetime
 		
 		TypedQuery<Product> query = em.createQuery(query_string, Product.class);
 		for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -91,7 +94,7 @@ public class ProductService {
 				query.setParameter(entry.getKey(), Integer.parseInt(entry.getValue()));
 			}
 			else if(entry.getValue().matches("^\\d+\\.\\d+$")) {
-				query.setParameter(entry.getKey(), Double.parseDouble(entry.getValue()));
+				query.setParameter(entry.getKey(), Float.parseFloat(entry.getValue()));
 			}
 			else {
 				query.setParameter(entry.getKey(), entry.getValue());
@@ -100,11 +103,16 @@ public class ProductService {
 		
 		// Get total page
 		int maxResults = query.getResultList().size();
+		float temp = (	(float) maxResults) / ((float)itemsPerPage);
 		int maxPage = maxResults/itemsPerPage;
+		if(temp <= maxPage) {
+			maxPage--;
+		}
 		
 		// Pagination
 		query.setFirstResult(page*itemsPerPage);
 		query.setMaxResults(itemsPerPage);
+		
 		shoes = query.getResultList();
 		
 		// Prepare response

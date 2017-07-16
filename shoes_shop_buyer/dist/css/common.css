@@ -5,7 +5,8 @@ ln-dashed {
   border: 1px dashed gray;
   width: 90%;
   margin: auto;
-  display: block; }
+  display: block;
+  clear: both; }
 
 .ss-popup {
   position: fixed;
@@ -14,7 +15,7 @@ ln-dashed {
   width: 400px;
   height: 200px;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #efefef;
   padding: 20px;
   border: 1px dashed brown;
   display: none; }
@@ -34,28 +35,49 @@ section {
 
 /* Navbar */
 .ss-navbar {
-  height: 50px;
   background: #F7F7F7;
-  border-bottom: 4px dashed #eee; }
+  border-bottom: 4px dashed brown;
+  display: flex; }
 
 .ss-navbar #logo {
   margin: 0 20px;
-  display: inline-block; }
+  display: inline;
+  float: left; }
 
-.ss-navbar #menu-dropdown {
+.ss-navbar #ss-navbar-collapse-trigger {
+  display: none; }
+
+.ss-navbar input[type=checkbox]:checked ~ ul {
+  display: block; }
+
+.ss-navbar label #menu-dropdown {
   margin: 25px;
-  visibility: hidden; }
+  display: none;
+  cursor: pointer; }
+
+.ss-navbar label #menu-dropdown:hover {
+  opacity: .5; }
 
 .ss-navbar ul {
-  display: inline-block; }
+  display: inline;
+  background: none;
+  position: relative;
+  z-index: 999;
+  overflow: hidden;
+  margin: 0;
+  clear: both; }
 
 .ss-navbar ul li {
   float: left;
-  list-style: none; }
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 16; }
 
 .ss-navbar ul li::before {
   content: "|";
-  margin: 20px;
+  margin: 0 20px;
   color: red; }
 
 .ss-navbar ul li a {
@@ -87,15 +109,18 @@ section {
   padding: 10px;
   margin: 10px; }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .ss-navbar {
-    height: 100px; }
+    height: 100px;
+    display: block; }
   .ss-navbar #logo img {
     height: 100px;
     width: 100px; }
-  .ss-navbar #menu-dropdown {
-    margin: 25px;
-    visibility: visible; }
+  .ss-navbar label #menu-dropdown {
+    display: initial; }
+  .ss-navbar ul {
+    display: none;
+    background: white; }
   .ss-navbar ul {
     width: 100%;
     clear: both;
@@ -103,7 +128,8 @@ section {
     background: white; }
   .ss-navbar ul li {
     width: 100%;
-    padding: 10px 0; } }
+    padding: 10px 0;
+    text-align: left; } }
 
 /* Content */
 .ss-container {
@@ -134,10 +160,11 @@ section {
   padding: 10px;
   background: white; }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .ss-col-6, .ss-col-3, .ss-col-9 {
     width: 100%;
-    float: none; } }
+    float: none;
+    padding: 1% 0; } }
 
 .ss-button-sm {
   padding: 5px 30px !important; }
@@ -195,7 +222,7 @@ input.ss-form-input-default, textarea.ss-form-input-default {
 /* Footer */
 footer {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   background: #7F7F7F;
   border-top: 2px dashed #ddd;
   color: white; }

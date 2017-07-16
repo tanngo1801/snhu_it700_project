@@ -4,7 +4,7 @@ var NT_VALIDATOR = {
 	},
 	validateTheForm: function(form_id) {
 		var form = $("#" + form_id);
-
+		
 		var requiredInputs = form.find(".nt-input-required");
 		for(i = 0; i < requiredInputs.length; i++) {
 			var item = $(requiredInputs[i]);
@@ -50,8 +50,25 @@ var NT_VALIDATOR = {
 				err_mess_obj.show();
 				return false;
 			}
+		}
+
+		var integerInputs = form.find(".nt-input-integer");
+		for(i = 0; i < integerInputs.length; i++) {
+			var item = $(integerInputs[i]);
+			var value = item.val();
+			var err_mess = item.attr("nt-validation-error-id");
+			var err_mess_obj = $("#" + err_mess);
+			if(isNaN(value)) {
+				err_mess_obj.text("Input must be an integer");
+				err_mess_obj.show();
+				return false;
+			}
 			else {
-				
+				if(value.indexOf(".")>=0) {
+					err_mess_obj.text("Input must be an integer");
+					err_mess_obj.show();
+					return false;
+				}
 			}
 		}
 

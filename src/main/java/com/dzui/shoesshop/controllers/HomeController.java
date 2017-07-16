@@ -10,7 +10,7 @@ import com.dzui.shoesshop.entities.Question;
 import com.dzui.shoesshop.services.QuestionService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins="*")
 public class HomeController {
 	@Autowired
 	private QuestionService question_service;

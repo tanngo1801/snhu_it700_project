@@ -2,7 +2,7 @@
 
 <div>
 	<div id="shoes-image" class="ss-col-6">
-		<img src="{{ shoes.images[0].url }}" width="300" height="300">
+		<img src="{{ shoes.images[0].url ? shoes.images[0].url : 'imgs/sample-fault.png' }}" width="300" height="300">
 	</div>
 
 	<form id="order">
@@ -21,7 +21,7 @@
 		</div>
 
 		<div id="cart" class="ss-col-3">
-			<button id="submit" type="button" class="ss-button-warning">Add to cart</button>
+			<button id="submit" type="button" class="ss-button-warning-fill">Add to cart</button>
 		</div>
 	</form>
 

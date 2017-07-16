@@ -1,0 +1,37 @@
+<dir>
+	<a href="#!/question/create">+ ADD ...</a>
+	<div class="ss-scrollable">
+		<table>
+			<tr>
+				<th>id</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Subject</th>
+				<th>Email</th>
+				<th>Message</th>
+				<th>Watched</th>
+				<th>Created At</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="item in questions">
+				<td>{{ item.id }}</td>
+				<td>{{ item.firstname }}</td>
+				<td>{{ item.lastname }}</td>
+				<td>{{ item.subject }}</td>
+				<td>{{ item.email }}</td>
+				<td>{{ item.message }}</td>
+				<td>{{ item.watched ? "Old" : "New" }}</td>
+				<td>{{ item.createdAt }}</td>
+				<td>
+					<button id="item-{{ item.id }}" class="delete" ng-click="questionDelete($event)">Delete</button>
+					<a href="#!/question/update/{{ item.id }}">Update</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="ss-pagination">
+		<p>Total page: <span>{{ maxPage + 1 }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
+		<p><button id="back"><<< Back</button> | <button id="next">Next >>></button></p>
+		<p>Go to page: <input id="page" ng-model="page" ng-init="page=0" type="text" name="" size="1"><input id="page-button" type="button" value="Go"></p>
+	</div>
+</dir>

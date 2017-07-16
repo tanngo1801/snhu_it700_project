@@ -1,0 +1,16 @@
+.container {
+	margin: 20px;
+
+	.ss-col-6 {
+		background: #777;
+		text-align: center;
+		img {
+			background: #aaa;
+			padding: 10px;
+			border-radius: 50%;
+			display: inline;
+			width: 100px;
+			height: 100px;
+		}
+	}
+}

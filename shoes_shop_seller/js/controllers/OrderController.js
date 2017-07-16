@@ -1,4 +1,4 @@
-app.controller("OrderController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("OrderController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Orders
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -22,14 +22,24 @@ app.controller("OrderController", function($scope, $window, $location, $sessionS
 				filter_inputs = url.substring(url.indexOf("?")+1);
 				json_filter_inputs = Json_Helper.urlParamsToJson(url);
 			}
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/order/list?" + filter_inputs, function(res) {
-				$scope.orders = res.orders;
-				$scope.page = json_filter_inputs.page | 0;
-				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '10';
-				$scope.maxPage = res.maxPage;
-				$scope.$digest();
+
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/order/list",
+				data: filter_inputs,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.orders = res.orders;
+					$scope.page = json_filter_inputs.page | 0;
+					$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '12';
+					$scope.maxPage = res.maxPage;
+					$scope.$digest();
+				}
 			});
 		}
+
 
 		function paginationInit() {
 			$(".ss-pagination #page-button").click(paginationUpdated);
@@ -67,14 +77,21 @@ app.controller("OrderController", function($scope, $window, $location, $sessionS
 
 		function findOrderById() {
 			var id = $routeParams.id;
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/order/update/" + id, function(res) {
-				$scope.order = {};
-				$scope.order.id = res.id;
-				$scope.order.paypal_id = res.paypalId;
-				$scope.order.amount = res.amount;
-				$scope.order.status_id = res.status.id + "";
-				$scope.order.customer_id = res.customer.id;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/order/update/" + id,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.order = {};
+					$scope.order.id = res.id;
+					$scope.order.paypal_id = res.paypalId;
+					$scope.order.amount = res.amount;
+					$scope.order.status_id = res.status.id + "";
+					$scope.order.customer_id = res.customer.id;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -93,7 +110,10 @@ app.controller("OrderController", function($scope, $window, $location, $sessionS
 				$.ajax({
 					method: "PUT",
 					url: CONSTANTS.SS_SERVER + "/api/v1/order/update/" + id, 
-					data: $scope.order, 
+					data: $scope.order,
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
 					success: function(res) {
 						alert("Item updated suscessfully.");
 						location.reload();

@@ -1,12 +1,19 @@
+h1 {
+  color: green;
+  font-weight: bolder;
+  font-size: 30px;
+  margin: 20px;
+  text-decoration: underline; }
+
 section {
   padding: 5px; }
 
-section #cart > div {
+section #cart-items > div {
   height: 230px;
   padding: 10px; }
 
 section #summary > div {
-  height: 300px;
+  display: block;
   padding: 10px;
   border: #aaa solid 4px; }
 
@@ -14,8 +21,20 @@ section #summary #paypal:hover {
   display: inline-block;
   opacity: .5; }
 
-section #cart #item {
-  border: 1px dashed brown;
+section #cart-items #item {
+  border: 2px solid brown;
   margin-top: 2px; }
-  section #cart #item .ss-col-9 {
-    border-right: 1px dashed brown; }
+  section #cart-items #item .ss-col-9 {
+    border-right: 2px solid brown; }
+    section #cart-items #item .ss-col-9 img {
+      width: 100%; }
+
+@media (max-width: 768px) {
+  section #cart-items {
+    display: table; }
+    section #cart-items #item {
+      display: table; }
+      section #cart-items #item .ss-col-9 {
+        border-right: none; }
+  section #summary {
+    display: inline; } }

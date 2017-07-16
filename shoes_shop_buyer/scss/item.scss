@@ -13,3 +13,15 @@
 		color: red;
 	}
 }
+
+@media (max-width: 768px) {
+	#shoes-image {
+		img {
+			width: 100%;
+		}
+	}
+
+	#order {
+		padding: 20px;
+	}
+}

@@ -1,4 +1,4 @@
-app.controller("StyleController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("StyleController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Styles
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -24,12 +24,21 @@ app.controller("StyleController", function($scope, $window, $location, $sessionS
 				filter_inputs = url.substring(url.indexOf("?")+1);
 				json_filter_inputs = Json_Helper.urlParamsToJson(url);
 			}
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/type/list?" + filter_inputs, function(res) {
-				$scope.styles = res.types;
-				$scope.page = json_filter_inputs.page | 0;
-				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '10';
-				$scope.maxPage = res.maxPage;
-				$scope.$digest();
+			
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/type/list",
+				data: filter_inputs,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.styles = res.types;
+					$scope.page = json_filter_inputs.page | 0;
+					$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '12';
+					$scope.maxPage = res.maxPage;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -68,6 +77,9 @@ app.controller("StyleController", function($scope, $window, $location, $sessionS
 			$.ajax({
 				method: "DELETE",
 				url: CONSTANTS.SS_SERVER + "/api/v1/type/delete/"+id, 
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					if(res===true) {
 						alert("Item deleted successfully.");
@@ -84,9 +96,16 @@ app.controller("StyleController", function($scope, $window, $location, $sessionS
 
 		function findStyleById() {
 			var id = $routeParams.id;
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/type/update/" + id, function(res) {
-				$scope.style = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/type/update/" + id,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.style = res;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -98,6 +117,9 @@ app.controller("StyleController", function($scope, $window, $location, $sessionS
 					method: "PUT",
 					url: CONSTANTS.SS_SERVER + "/api/v1/type/update/" + id, 
 					data: $scope.style, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
 					success: function(res) {
 						alert("Item updated suscessfully.");
 						location.reload();
@@ -112,8 +134,16 @@ app.controller("StyleController", function($scope, $window, $location, $sessionS
 		function createStyle() {
 			var valid = validator.validateTheForm("create-style");
 			if(valid) {
-				$.post(CONSTANTS.SS_SERVER + "/api/v1/type/create", $scope.style, function(res) {
-					$window.location.href = "#!/style/list";
+				$.ajax({
+					method: "POST",
+					url: CONSTANTS.SS_SERVER + "/api/v1/type/create", 
+					data: $scope.style, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
+					success: function(res) {
+						$window.location.href = "#!/style/list";
+					}
 				});
 			}
 		}

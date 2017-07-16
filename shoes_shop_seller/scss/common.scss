@@ -8,38 +8,42 @@ table td {
 
 .ss-navbar {
 	background: black;
-	/*position: fixed;*/
-}
-.ss-navbar #logo {
-	display: inline-block;
-}
-.ss-navbar a {
-	display: inline-block;
-}
-.ss-navbar img {
-	width: 40px;
-	height: 40px;
-	vertical-align: middle;
-}
-.ss-navbar #headings {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	line-height: 40px;
-	vertical-align: middle;
-	float: right;
+	
+	#logo {
+		display: inline-block;
+	}
+
 	a {
-		color: white;
-		text-decoration: none;
-		font-weight: bolder;
+		display: inline-block;
 	}
-	a:hover {
-		color: #aaa;
+
+	img {
+		width: 40px;
+		height: 40px;
+		vertical-align: middle;
 	}
-}
-.ss-navbar #headings li {
-	display: inline-block;
-	margin: 0 20px;
+
+	#headings {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+		line-height: 40px;
+		vertical-align: middle;
+		float: right;
+		a {
+			color: white;
+			text-decoration: none;
+			font-weight: bolder;
+		}
+		a:hover {
+			color: #aaa;
+		}
+
+		li {
+			display: inline-block;
+			margin: 0 20px;
+		}
+	}
 }
 
 sidebar {
@@ -51,7 +55,9 @@ sidebar {
 	color: white;
 
 	#resources {
-		list-style-type: square;
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
 		li {
 			padding: 10px;
 			border-bottom: 1px white dotted;
@@ -60,6 +66,11 @@ sidebar {
 				color: white;
 				font-weight: bold;
 				font-size: 20px;
+				img {
+					width: 30px;
+					height: 30px;
+					margin-right: 10px;
+				}
 			}
 			a:hover {
 				color: #aaa;
@@ -67,12 +78,25 @@ sidebar {
 		}
 	}
 }
+@media (max-width: 768px) {
+	#resources {
+		width: auto;
+		display: inline;
+
+		li {
+			text-align: center;
+			span {
+				display: none;
+			}
+		}
+	}
+}
+
 
 .ss-icon {
 	width: 15px;
 	height: 15px;
 }
-
 .ss-row {
 	width: 100%;
 	padding: 10px 0;
@@ -112,5 +136,19 @@ section {
 	table-layout: fixed;
 	form {
 		padding: 20px;
+	}
+}
+
+.ss-scrollable {
+	width: 100%;
+	overflow-x: scroll;
+
+	table {
+		tr:hover {
+			opacity: .5;
+		}
+		tr:nth-child(even) {
+			background: #aaa;
+		}
 	}
 }

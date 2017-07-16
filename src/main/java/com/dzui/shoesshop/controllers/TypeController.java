@@ -14,7 +14,7 @@ import com.dzui.shoesshop.entities.Type;
 import com.dzui.shoesshop.services.TypeService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class TypeController {
 	@Autowired
 	private TypeService type_service;

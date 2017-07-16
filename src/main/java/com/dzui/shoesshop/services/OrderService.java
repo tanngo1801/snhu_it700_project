@@ -86,7 +86,7 @@ public class OrderService {
 
 		// Get total page
 		int maxResults = query.getResultList().size();
-		int maxPage = maxResults / itemsPerPage;
+		int maxPage = maxResults/(itemsPerPage+1);
 
 		// Pagination
 		query.setFirstResult(page * itemsPerPage);

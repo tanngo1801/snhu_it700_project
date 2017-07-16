@@ -1,0 +1,12 @@
+.container {
+  margin: 20px; }
+  .container .ss-col-6 {
+    background: #777;
+    text-align: center; }
+    .container .ss-col-6 img {
+      background: #aaa;
+      padding: 10px;
+      border-radius: 50%;
+      display: inline;
+      width: 100px;
+      height: 100px; }

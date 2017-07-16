@@ -17,15 +17,29 @@ $(document).ready(function() {
 	}
 
 	function updateCartStatus() {
-		var cart = document.cookie;
+		var cart = getCookie("cart");
 
 		if(!cart) {
 			$("#cart-status").text(0);
 		}
 		else {
-			cart = cart.split("=")[1];
-			var order_details = JSON.parse(cart);
-			$("#cart-status").text(order_details.length);
+			$("#cart-status").text(JSON.parse(cart).length);
 		}
+	}
+
+	function getCookie(cname) {
+    	var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
 	}
 });

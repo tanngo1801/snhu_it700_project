@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dzui.shoesshop.services.ProductService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins="*")
 public class ListController {
 	@Autowired
 	private ProductService product_service;

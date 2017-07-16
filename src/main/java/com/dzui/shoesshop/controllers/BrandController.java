@@ -14,7 +14,7 @@ import com.dzui.shoesshop.entities.Brand;
 import com.dzui.shoesshop.services.BrandService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class BrandController {	
 	@Autowired
 	private BrandService brand_service;

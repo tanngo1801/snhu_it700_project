@@ -5,37 +5,31 @@ table td {
   padding: 5px; }
 
 .ss-navbar {
-  background: black;
-  /*position: fixed;*/ }
-
-.ss-navbar #logo {
-  display: inline-block; }
-
-.ss-navbar a {
-  display: inline-block; }
-
-.ss-navbar img {
-  width: 40px;
-  height: 40px;
-  vertical-align: middle; }
-
-.ss-navbar #headings {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  line-height: 40px;
-  vertical-align: middle;
-  float: right; }
-  .ss-navbar #headings a {
-    color: white;
-    text-decoration: none;
-    font-weight: bolder; }
-  .ss-navbar #headings a:hover {
-    color: #aaa; }
-
-.ss-navbar #headings li {
-  display: inline-block;
-  margin: 0 20px; }
+  background: black; }
+  .ss-navbar #logo {
+    display: inline-block; }
+  .ss-navbar a {
+    display: inline-block; }
+  .ss-navbar img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle; }
+  .ss-navbar #headings {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    line-height: 40px;
+    vertical-align: middle;
+    float: right; }
+    .ss-navbar #headings a {
+      color: white;
+      text-decoration: none;
+      font-weight: bolder; }
+    .ss-navbar #headings a:hover {
+      color: #aaa; }
+    .ss-navbar #headings li {
+      display: inline-block;
+      margin: 0 20px; }
 
 sidebar {
   position: fixed;
@@ -45,7 +39,9 @@ sidebar {
   border-top: 2px white solid;
   color: white; }
   sidebar #resources {
-    list-style-type: square; }
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
     sidebar #resources li {
       padding: 10px;
       border-bottom: 1px white dotted; }
@@ -54,8 +50,21 @@ sidebar {
         color: white;
         font-weight: bold;
         font-size: 20px; }
+        sidebar #resources li a img {
+          width: 30px;
+          height: 30px;
+          margin-right: 10px; }
       sidebar #resources li a:hover {
         color: #aaa; }
+
+@media (max-width: 768px) {
+  #resources {
+    width: auto;
+    display: inline; }
+    #resources li {
+      text-align: center; }
+      #resources li span {
+        display: none; } }
 
 .ss-icon {
   width: 15px;
@@ -98,3 +107,11 @@ section {
   table-layout: fixed; }
   section form {
     padding: 20px; }
+
+.ss-scrollable {
+  width: 100%;
+  overflow-x: scroll; }
+  .ss-scrollable table tr:hover {
+    opacity: .5; }
+  .ss-scrollable table tr:nth-child(even) {
+    background: #aaa; }

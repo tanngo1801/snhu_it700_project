@@ -26,7 +26,7 @@ import com.dzui.shoesshop.services.ProductService;
 import com.dzui.shoesshop.services.StatusService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins="*")
 public class ItemController {
 	@Autowired
 	private ProductService product_service;
@@ -99,8 +99,7 @@ public class ItemController {
 			orderDetail.setOrder(order);
 			order_detail_service.create(orderDetail);
 		}
-		
-		 
+
 		return order;
 	}
 }

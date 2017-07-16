@@ -15,11 +15,12 @@ import com.dzui.shoesshop.entities.Product;
 import com.dzui.shoesshop.services.ProductService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class ProductController {	
 	@Autowired
 	private ProductService product_service;
-
+	
+	@CrossOrigin(origins="http://localhost:8889")
 	@RequestMapping(method=RequestMethod.GET, value="api/v1/product/list")
 	public Map<Object, Object> filterShoes(@RequestParam Map<String, String> params) {
 		return product_service.filterShoes(params);

@@ -1,9 +1,11 @@
+// 84/125
 var app = angular.module("ShoesShop", ["ngRoute", "ngSessionStorage", "ngCookies"]);
 
 app.constant("CONSTANTS", {
-    SS_SERVER: "http://localhost:8080",
-    sizes: [5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15],
-    SS_VALIDATOR: NT_VALIDATOR
+    SS_SERVER: "http://10.0.0.178:8080",
+    sizes: ["5.0","5.5","6.0","6.5","7.0","7.5","8.0","8.5","9.0","9.5","10.0","10.5","11.0","11.5","12.0","12.5","13.0","13.5","14.0","14.5","15.0"],
+    SS_VALIDATOR: NT_VALIDATOR,
+    itemsPerPageList: [12,16,20,24]
 });
 
 app.config(function($routeProvider) {

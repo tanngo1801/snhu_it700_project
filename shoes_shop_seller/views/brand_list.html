@@ -1,24 +1,26 @@
 <dir>
 	<a href="#!/brand/create">+ ADD ...</a>
-	<table id="data">
-		<tr>
-			<th>id</th>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Actions</th>
-		</tr>
-		<tr ng-repeat="item in brands">
-			<td>{{ item.id }}</td>
-			<td>{{ item.name }}</td>
-			<td>{{ item.description }}</td>
-			<td>
-				<button id="item-{{ item.id }}" class="delete" ng-click="brandDelete($event)">Delete</button>
-				<a href="#!/brand/update/{{ item.id }}">Update</a>
-			</td>
-		</tr>
-	</table>
+	<div class="ss-scrollable">
+		<table>
+			<tr>
+				<th>id</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="item in brands">
+				<td>{{ item.id }}</td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.description }}</td>
+				<td>
+					<button id="item-{{ item.id }}" class="delete" ng-click="brandDelete($event)">Delete</button>
+					<a href="#!/brand/update/{{ item.id }}">Update</a>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<div class="ss-pagination">
-		<p>Total page: <span>{{ maxPage }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
+		<p>Total page: <span>{{ maxPage + 1 }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
 		<p><button id="back"><<< Back</button> | <button id="next">Next >>></button></p>
 		<p>Go to page: <input id="page" ng-model="page" ng-init="page=0" type="text" name="" size="1"><input id="page-button" type="button" value="Go"></p>
 	</div>

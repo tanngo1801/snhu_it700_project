@@ -1,13 +1,36 @@
 var app = angular.module("ShoesShop", ["ngRoute", "ngSessionStorage", "ngCookies"]);
 
 app.constant("CONSTANTS", {
-    SS_SERVER: "http://localhost:8080",
-    sizes: [5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15],
+    SS_SERVER: "http://10.0.0.178:8080",
+    sizes: ["5.0","5.5","6.0","6.5","7.0","7.5","8.0","8.5","9.0","9.5","10.0","10.5","11.0","11.5","12.0","12.5","13.0","13.5","14.0","14.5","15.0"],
     SS_VALIDATOR: NT_VALIDATOR,
-    itemsPerPageList: [10,15,20,25]
+    itemsPerPageList: [12,16,20,24]
 });
 
-app.config(function($routeProvider) {
+app.run(function($rootScope, $cookies, $window, $location, CONSTANTS) {
+    $rootScope.$on("$routeChangeStart", function() {
+        if($window.location.href.indexOf("/login.html") === -1 && !$cookies.get("jwtToken")) {
+            $window.location.href = "/login.html";
+        }
+        else if($window.location.href.indexOf("/login.html") === -1 && $cookies.get("jwtToken")) {
+            var token = $cookies.get("jwtToken");
+            var data = {token: token};
+            $.ajax({
+                method: "POST",
+                url: CONSTANTS.SS_SERVER + "/auth/validate",
+                data: data,
+                success: function(res) {
+                    
+                },
+                error: function(res) {
+                    $window.location.href = "/login.html";
+                }
+            });
+        }
+    });
+});
+
+app.config(function($routeProvider, $httpProvider) {
 	$routeProvider
     .when("/", {
         templateUrl : "views/home.html",
@@ -81,9 +104,17 @@ app.config(function($routeProvider) {
         templateUrl: "views/address_update.html",
         controller: "AddressController"
     })
-    .when("/login", {
-        templateUrl: "views/login.html",
-        controller: "AuthenticationController"
+    .when("/question/list", {
+        templateUrl : "views/question_list.html",
+        controller: "QuestionController"
+    })
+    .when("/question/create", {
+        templateUrl: "views/question_create.html",
+        controller: "QuestionController"
+    })
+    .when("/question/update/:id", {
+        templateUrl: "views/question_update.html",
+        controller: "QuestionController"
     })
     .otherwise({
     	redirectTo : "/"

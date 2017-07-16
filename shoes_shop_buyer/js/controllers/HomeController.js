@@ -2,6 +2,7 @@ app.controller("HomeController", function($scope, $window, $location, Json_Helpe
 	var validator = CONSTANTS.SS_VALIDATOR;
 	$scope.filter = {};
 
+	init();
 	loadGenders();
 	loadStyles();
 	loadSizes();
@@ -9,6 +10,10 @@ app.controller("HomeController", function($scope, $window, $location, Json_Helpe
 	$("#search").click(searchShoes);
 
 	// Functions
+	function init() {
+		$("#ss-navbar-collapse-trigger").prop("checked", false);
+	}
+
 	function sendQuestion() {
 		var valid = validator.validateTheForm("question");
 		if(valid) {
@@ -23,6 +28,8 @@ app.controller("HomeController", function($scope, $window, $location, Json_Helpe
 					$scope.question = res;
 					$scope.$digest();
 					$(".ss-popup").show().delay(3000).fadeOut();
+					$scope.form = {};
+					$scope.$digest();
 				}
 			})
 		}

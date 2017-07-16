@@ -1,20 +1,26 @@
-app.controller("ItemController", function($scope, $window, $location, Json_Helper, CONSTANTS) {
+app.controller("ItemController", function($scope, $window, $location, Json_Helper, CONSTANTS, $cookies) {
 	var validator = CONSTANTS.SS_VALIDATOR;
 	var url = $window.location.href;
 	var params = Json_Helper.urlParamsToJson(url);
 
+	init();
 	validator.init();
 	loadSizes();
 	loadTheShoes(params.id);
 	$("#submit").click(addToCart);
 	$("#continue-shopping").click(function() {
 		$(".ss-popup").fadeOut();
+		$window.location.href = "/#gender";
 	});
 	$("#checkout").click(function() {
 		$window.location.href = "#!/cart";
 	});
 
 	// Functions
+	function init() {
+		$("#ss-navbar-collapse-trigger").prop("checked", false);
+	}
+	
 	function loadTheShoes(id) {
 		$.get(CONSTANTS.SS_SERVER + "/find-the-shoes?id="+id, function(res) {
 			$scope.shoes = res;
@@ -30,7 +36,7 @@ app.controller("ItemController", function($scope, $window, $location, Json_Helpe
 		var valid = validator.validateTheForm("order");
 
 		if(valid) {
-			var cart = document.cookie;
+			var cart = $cookies.get("cart");
 			var order_details, order_detail;
 
 			if(!cart) {
@@ -42,10 +48,11 @@ app.controller("ItemController", function($scope, $window, $location, Json_Helpe
 				var now = new Date();
 				var nowTime = now.getTime();
 				var nextHour = nowTime + 60*60*1000;
-				document.cookie = "cart.tans.com=" + JSON.stringify(order_details) + "; expires=" + nextHour + "; path=/";
+				var expire = new Date(nextHour);
+				// document.cookie = "cart.tans.com=" + JSON.stringify(order_details) + "; expires=" + nextHour + "; path=/";
+				$cookies.put("cart", JSON.stringify(order_details), {'expires': expire});
 			}
 			else {
-				cart = cart.split("=")[1];
 				order_details = JSON.parse(cart);
 
 				order_detail = $scope.order;
@@ -56,7 +63,9 @@ app.controller("ItemController", function($scope, $window, $location, Json_Helpe
 				var now = new Date();
 				var nowTime = now.getTime();
 				var nextHour = nowTime + 60*60*1000;
-				document.cookie = "cart.tans.com=" + JSON.stringify(order_details) + "; expires=" + nextHour + "; path=/";
+				var expire = new Date(nextHour);
+				// document.cookie = "cart.tans.com=" + JSON.stringify(order_details) + "; expires=" + nextHour + "; path=/";
+				$cookies.put("cart", JSON.stringify(order_details), {'expires': expire});
 			}
 
 			$("#cart-status").text(order_details.length);

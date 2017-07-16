@@ -1,28 +1,30 @@
 <dir>
-	<table id="data">
-		<tr>
-			<th>ID</th>
-			<th>Paypal ID</th>
-			<th>Customer</th>
-			<th>Status ID</th>
-			<th>Mount</th>
-			<th>Created At</th>
-			<th>Actions</th>
-		</tr>
-		<tr ng-repeat="item in orders">
-			<td>{{ item.id }}</td>
-			<td>{{ item.paypalId }}</td>
-			<td>{{ item.customer.firstName + " " + item.customer.lastName }}</td>
-			<td>{{ item.status.name }}</td>
-			<td>${{ item.amount }}</td>
-			<td>{{ item.createdAt }}</td>
-			<td>
-				<a href="#!/order/update/{{ item.id }}">Update</a>
-			</td>
-		</tr>
-	</table>
+	<div class="ss-scrollable">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Paypal ID</th>
+				<th>Customer</th>
+				<th>Status ID</th>
+				<th>Mount</th>
+				<th>Created At</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="item in orders">
+				<td>{{ item.id }}</td>
+				<td>{{ item.paypalId }}</td>
+				<td>{{ item.customer.firstName + " " + item.customer.lastName }}</td>
+				<td>{{ item.status.name }}</td>
+				<td>${{ item.amount }}</td>
+				<td>{{ item.createdAt }}</td>
+				<td>
+					<a href="#!/order/update/{{ item.id }}">Update</a>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<div class="ss-pagination">
-		<p>Total page: <span>{{ maxPage }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
+		<p>Total page: <span>{{ maxPage + 1 }}</span> | Items per page: <select id="itemsPerPage" ng-model="itemsPerPage"><option ng-repeat="item in itemsPerPageList">{{ item }}</option></select></p>
 		<p><button id="back"><<< Back</button> | <button id="next">Next >>></button></p>
 		<p>Go to page: <input id="page" ng-model="page" ng-init="page=0" type="text" name="" size="1"><input id="page-button" type="button" value="Go"></p>
 	</div>

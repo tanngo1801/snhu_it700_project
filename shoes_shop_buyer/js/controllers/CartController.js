@@ -1,24 +1,42 @@
-app.controller("CartController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $cookies) {
+app.controller("CartController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $cookies) {
 	var order_details = [];
+    var validator = CONSTANTS.SS_VALIDATOR;
 
 	init();
+    validator.init();
 	loadOrderDetails();
 	deleteItem();
 	cancelOrder();
 	setupPayment();
+    $scope.updateQuantity = updateQuantity;
 
 	// Functions
+    function updateQuantity(event) {
+        var valid = validator.validateTheForm("cart-items");
+        var cart = $cookies.get("cart");
+        var index = $(event.target).attr("index");
+
+        if(valid) {
+            var itemList = JSON.parse(cart);
+            var changedItem = itemList[index];
+            changedItem.quantity = $(event.target).val();
+            itemList[index] = changedItem;
+            cart = JSON.stringify(itemList);
+            $cookies.put("cart", cart);
+            location.reload();
+        }
+    }
+
 	function init() {
 		$("#try-again").click(function() {
 			$(".ss-popup").hide();
 		});
+        $("#ss-navbar-collapse-trigger").prop("checked", false);
 	}
 
 	function loadOrderDetails() {
-		if(document.cookie) {
-			order_details = document.cookie;
-			order_details = order_details.split("=")[1];
-			order_details = JSON.parse(order_details);
+		if($cookies.get("cart")) {
+			order_details = JSON.parse($cookies.get("cart"));
 
 			$scope.order_details = order_details;
 
@@ -37,14 +55,14 @@ app.controller("CartController", function($scope, $window, $location, $sessionSt
 			order_details.splice(index, 1);
 
 			if(order_details.length <= 0) {
-				$cookies.remove("cart.tans.com");
+				$cookies.remove("cart");
 				delete $scope.order_details;
 			}
 			else {
 				var now = new Date();
 				var nowTime = now.getTime();
 				var nextHour = nowTime + 60*60*1000;
-				document.cookie = "cart.tans.com=" + JSON.stringify(order_details) + "; expires=" + nextHour + "; path=/";		
+				$cookies.put("cart", JSON.stringify(order_details), {"expires":new Date(nextHour)});		
 			}
 			location.reload();
 		};
@@ -55,7 +73,7 @@ app.controller("CartController", function($scope, $window, $location, $sessionSt
 			var now = new Date();
 			var nowTime = now.getTime();
 			var previousHour = nowTime - 60*60*1000;
-			$cookies.remove("cart.tans.com");
+			$cookies.remove("cart");
 			location.reload();
 		});
 	}
@@ -118,7 +136,7 @@ app.controller("CartController", function($scope, $window, $location, $sessionSt
             		order.order_details = JSON.stringify(order_detail_array);
 
             		$.post(CONSTANTS.SS_SERVER + "/place-order", order, function(res) {
-            			$cookies.remove("cart.tans.com");
+            			$cookies.remove("cart");
             			$("#cart-status").text(0);
             			$window.location.href = "#!/payment-succeeded?email=" + payer_info.email;
             		});

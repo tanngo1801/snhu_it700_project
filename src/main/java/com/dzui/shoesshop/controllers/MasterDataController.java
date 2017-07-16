@@ -16,7 +16,7 @@ import com.dzui.shoesshop.services.GenderService;
 import com.dzui.shoesshop.services.StatusService;
 import com.dzui.shoesshop.services.TypeService;
 
-@CrossOrigin(origins = "http://localhost:8888")
+@CrossOrigin(origins="*")
 @RestController
 public class MasterDataController {
 	@Autowired

@@ -1,5 +1,7 @@
 package com.dzui.shoesshop.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,13 @@ public class Question {
 	
 	@Column
 	private String email;
+
+	@Column
+	private boolean watched;
 	
+	@Column(name="created_at")
+	private Date created_at;
+
 	public Question() {}
 	
 	public Question(String message, String subject, String firstname, String lastname, String email) {
@@ -37,6 +45,10 @@ public class Question {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
+	}
+	
+	public Date getCreated_at() {
+		return created_at;
 	}
 
 	public int getId() {
@@ -85,5 +97,13 @@ public class Question {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean isWatched() {
+		return watched;
+	}
+
+	public void setWatched(boolean watched) {
+		this.watched = watched;
 	}
 }

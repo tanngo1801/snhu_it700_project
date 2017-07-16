@@ -1,4 +1,4 @@
-app.controller("BrandController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("BrandController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Brands
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -24,12 +24,21 @@ app.controller("BrandController", function($scope, $window, $location, $sessionS
 				filter_inputs = url.substring(url.indexOf("?")+1);
 				json_filter_inputs = Json_Helper.urlParamsToJson(url);
 			}
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/brand/list?" + filter_inputs, function(res) {
-				$scope.brands = res.brands;
-				$scope.page = json_filter_inputs.page | 0;
-				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '10';
-				$scope.maxPage = res.maxPage;
-				$scope.$digest();
+
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/brand/list",
+				data: filter_inputs,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.brands = res.brands;
+					$scope.page = json_filter_inputs.page | 0;
+					$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '12';
+					$scope.maxPage = res.maxPage;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -68,6 +77,9 @@ app.controller("BrandController", function($scope, $window, $location, $sessionS
 			$.ajax({
 				method: "DELETE",
 				url: CONSTANTS.SS_SERVER + "/api/v1/brand/delete/"+id, 
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					if(res===true) {
 						alert("Item deleted successfully.");
@@ -84,9 +96,16 @@ app.controller("BrandController", function($scope, $window, $location, $sessionS
 
 		function findBrandById() {
 			var id = $routeParams.id;
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/brand/update/" + id, function(res) {
-				$scope.brand = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/brand/update/" + id,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.brand = res;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -98,6 +117,9 @@ app.controller("BrandController", function($scope, $window, $location, $sessionS
 					method: "PUT",
 					url: CONSTANTS.SS_SERVER + "/api/v1/brand/update/" + id, 
 					data: $scope.brand, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
 					success: function(res) {
 						alert("Item updated suscessfully.");
 						location.reload();
@@ -112,8 +134,16 @@ app.controller("BrandController", function($scope, $window, $location, $sessionS
 		function createBrand() {
 			var valid = validator.validateTheForm("create-brand");
 			if(valid) {
-				$.post(CONSTANTS.SS_SERVER + "/api/v1/brand/create", $scope.brand, function(res) {
-					$window.location.href = "#!/brand/list";
+				$.ajax({
+					method: "POST",
+					url: CONSTANTS.SS_SERVER + "/api/v1/brand/create", 
+					data: $scope.brand, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
+					success: function(res) {
+						$window.location.href = "#!/brand/list";
+					}
 				});
 			}
 		}

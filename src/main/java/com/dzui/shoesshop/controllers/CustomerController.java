@@ -11,7 +11,7 @@ import com.dzui.shoesshop.entities.Customer;
 import com.dzui.shoesshop.services.CustomerService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class CustomerController {
 	@Autowired
 	private CustomerService customer_service;

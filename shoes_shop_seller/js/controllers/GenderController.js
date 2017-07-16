@@ -1,4 +1,4 @@
-app.controller("GenderController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("GenderController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams) {
 	// Genders
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -24,12 +24,21 @@ app.controller("GenderController", function($scope, $window, $location, $session
 				filter_inputs = url.substring(url.indexOf("?")+1);
 				json_filter_inputs = Json_Helper.urlParamsToJson(url);
 			}
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/gender/list?" + filter_inputs, function(res) {
-				$scope.genders = res.genders;
+
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/gender/list",
+				data: filter_inputs,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.genders = res.genders;
 				$scope.page = json_filter_inputs.page | 0;
-				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '10';
+				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '12';
 				$scope.maxPage = res.maxPage;
 				$scope.$digest();
+				}
 			});
 		}
 
@@ -68,6 +77,9 @@ app.controller("GenderController", function($scope, $window, $location, $session
 			$.ajax({
 				method: "DELETE",
 				url: CONSTANTS.SS_SERVER + "/api/v1/gender/delete/"+id, 
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					if(res===true) {
 						alert("Item deleted successfully.");
@@ -84,9 +96,16 @@ app.controller("GenderController", function($scope, $window, $location, $session
 
 		function findGenderById() {
 			var id = $routeParams.id;
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/gender/update/" + id, function(res) {
-				$scope.gender = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/gender/update/" + id,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.gender = res;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -98,6 +117,9 @@ app.controller("GenderController", function($scope, $window, $location, $session
 					method: "PUT",
 					url: CONSTANTS.SS_SERVER + "/api/v1/gender/update/" + id, 
 					data: $scope.gender, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
 					success: function(res) {
 						alert("Item updated suscessfully.");
 						location.reload();
@@ -112,8 +134,16 @@ app.controller("GenderController", function($scope, $window, $location, $session
 		function createGender() {
 			var valid = validator.validateTheForm("create-gender");
 			if(valid) {
-				$.post(CONSTANTS.SS_SERVER + "/api/v1/gender/create", $scope.gender, function(res) {
-					$window.location.href = "#!/gender/list";
+				$.ajax({
+					method: "POST",
+					url: CONSTANTS.SS_SERVER + "/api/v1/gender/create", 
+					data: $scope.gender, 
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
+					success: function(res) {
+						$window.location.href = "#!/gender/list";
+					}
 				});
 			}
 		}

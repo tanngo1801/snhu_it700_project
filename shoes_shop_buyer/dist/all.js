@@ -1,9 +1,11 @@
+// 84/125
 var app = angular.module("ShoesShop", ["ngRoute", "ngSessionStorage", "ngCookies"]);
 
 app.constant("CONSTANTS", {
-    SS_SERVER: "http://localhost:8080",
-    sizes: [5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15],
-    SS_VALIDATOR: NT_VALIDATOR
+    SS_SERVER: "http://10.0.0.178:8080",
+    sizes: ["5.0","5.5","6.0","6.5","7.0","7.5","8.0","8.5","9.0","9.5","10.0","10.5","11.0","11.5","12.0","12.5","13.0","13.5","14.0","14.5","15.0"],
+    SS_VALIDATOR: NT_VALIDATOR,
+    itemsPerPageList: [12,16,20,24]
 });
 
 app.config(function($routeProvider) {
@@ -89,16 +91,30 @@ $(document).ready(function() {
 	}
 
 	function updateCartStatus() {
-		var cart = document.cookie;
+		var cart = getCookie("cart");
 
 		if(!cart) {
 			$("#cart-status").text(0);
 		}
 		else {
-			cart = cart.split("=")[1];
-			var order_details = JSON.parse(cart);
-			$("#cart-status").text(order_details.length);
+			$("#cart-status").text(JSON.parse(cart).length);
 		}
+	}
+
+	function getCookie(cname) {
+    	var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
 	}
 });
 var NT_VALIDATOR = {
@@ -107,7 +123,7 @@ var NT_VALIDATOR = {
 	},
 	validateTheForm: function(form_id) {
 		var form = $("#" + form_id);
-
+		
 		var requiredInputs = form.find(".nt-input-required");
 		for(i = 0; i < requiredInputs.length; i++) {
 			var item = $(requiredInputs[i]);
@@ -153,8 +169,25 @@ var NT_VALIDATOR = {
 				err_mess_obj.show();
 				return false;
 			}
+		}
+
+		var integerInputs = form.find(".nt-input-integer");
+		for(i = 0; i < integerInputs.length; i++) {
+			var item = $(integerInputs[i]);
+			var value = item.val();
+			var err_mess = item.attr("nt-validation-error-id");
+			var err_mess_obj = $("#" + err_mess);
+			if(isNaN(value)) {
+				err_mess_obj.text("Input must be an integer");
+				err_mess_obj.show();
+				return false;
+			}
 			else {
-				
+				if(value.indexOf(".")>=0) {
+					err_mess_obj.text("Input must be an integer");
+					err_mess_obj.show();
+					return false;
+				}
 			}
 		}
 

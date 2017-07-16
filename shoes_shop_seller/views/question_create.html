@@ -1,0 +1,75 @@
+<form id="update-question">
+	<table>
+		<tr>
+			<td>
+				<label for="firstname">Firstname:</label>
+			</td>
+			<td>
+				<input id="firstname" class="nt-input-required" nt-validation-error-id="ss-firstname-error" type="text" ng-model="question.firstname">
+			</td>
+			<td>
+				<p id="ss-firstname-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="lastname">Lastname:</label>
+			</td>
+			<td>
+				<input id="lastname" class="nt-input-required" nt-validation-error-id="ss-lastname-error" type="text" ng-model="question.lastname">
+			</td>
+			<td>
+				<p id="ss-lastname-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="subject">Subject:</label>
+			</td>
+			<td>
+				<input id="subject" class="nt-input-required" nt-validation-error-id="ss-subject-error" type="text" ng-model="question.subject">
+			</td>
+			<td>
+				<p id="ss-subject-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="email">Email:</label>
+			</td>
+			<td>
+				<input id="email" class="nt-input-required" nt-validation-error-id="ss-email-error" type="text" ng-model="question.email">
+			</td>
+			<td>
+				<p id="ss-email-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="message">Message:</label>
+			</td>
+			<td>
+				<textarea id="message" class="nt-input-required" nt-validation-error-id="ss-message-error" type="text" ng-model="question.message"></textarea>
+			</td>
+			<td>
+				<p id="ss-message-error" class="nt-validation-error"></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="watched">Watched:</label>
+			</td>
+			<td>
+				<select id="watched" ng-model="question.watched">
+					<option ng-repeat="item in ['false', 'true']" value="{{ item }}">{{ item }}</option>
+				</select>
+			</td>
+			<td>		
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="create">Create</button></td>
+		</tr>
+	</table>
+</form>

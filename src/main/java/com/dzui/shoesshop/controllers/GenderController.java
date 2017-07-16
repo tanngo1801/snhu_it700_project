@@ -14,7 +14,7 @@ import com.dzui.shoesshop.entities.Gender;
 import com.dzui.shoesshop.services.GenderService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:8888")
+@CrossOrigin(origins="*")
 public class GenderController {
 	@Autowired
 	private GenderService gender_service;

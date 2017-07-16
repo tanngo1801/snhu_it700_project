@@ -1,4 +1,4 @@
-app.controller("ProductController", function($scope, $window, $location, $sessionStorage, Json_Helper, CONSTANTS, $routeParams) {
+app.controller("ProductController", function($scope, $window, $location, $cookies, Json_Helper, CONSTANTS, $routeParams, $http) {
 	// Products
 	var validator = CONSTANTS.SS_VALIDATOR;
 	validator.init();
@@ -25,12 +25,20 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 				json_filter_inputs = Json_Helper.urlParamsToJson(url);
 			}
 
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/product/list?" + filter_inputs, function(res) {
-				$scope.shoes = res.shoes;
-				$scope.page = json_filter_inputs.page | 0;
-				$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '10';
-				$scope.maxPage = res.maxPage;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/product/list",
+				data: json_filter_inputs,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					$scope.shoes = res.shoes;
+					$scope.page = json_filter_inputs.page | 0;
+					$scope.itemsPerPage = json_filter_inputs.itemsPerPage ? json_filter_inputs.itemsPerPage : '12';
+					$scope.maxPage = res.maxPage;
+					$scope.$digest();
+				}
 			});
 		}
 
@@ -41,6 +49,9 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 			$.ajax({
 				method: "DELETE",
 				url: CONSTANTS.SS_SERVER + "/api/v1/product/delete/"+id, 
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
 				success: function(res) {
 					if(res===true) {
 						alert("Item deleted successfully.");
@@ -91,31 +102,51 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 		}
 
 		function loadBrands() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-brands", function(res) {
-				$scope.brands = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-brands",
+				success: function(res) {
+					$scope.brands = res;
+					$scope.$digest();
+				}
 			});
 		}
 
 		function loadStyles() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-styles", function(res) {
-				$scope.styles = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-styles",
+				success: function(res) {
+					$scope.styles = res;
+					$scope.$digest();
+				}
 			});
 		}
 
 		function loadGenders() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-genders", function(res) {
-				$scope.genders = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-genders",
+				success: function(res) {
+					$scope.genders = res;
+					$scope.$digest();
+				}
 			});
 		}
 
 		function createProduct() {
 			var valid = validator.validateTheForm("create-product");
 			if(valid) {
-				$.post(CONSTANTS.SS_SERVER + "/api/v1/product/create", $scope.product, function(res) {
-					$window.location.href = "#!/products";
+				$.ajax({
+					method: "POST",
+					url: CONSTANTS.SS_SERVER + "/api/v1/product/create",
+					data: $scope.product,
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
+					success: function(res) {
+						$window.location.href = "#!/product/list";
+					}
 				});
 			}
 		}
@@ -127,18 +158,26 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 
 		function findShoesById() {
 			var id = $routeParams.id;
-			$.get(CONSTANTS.SS_SERVER + "/api/v1/product/update/" + id, function(res) {
-				res.type = res.type.id+"";
-				res.gender = res.gender.id+"";
-				res.brand = res.brand.id+"";
-				res.size = res.size+"";
-				res.activated = res.activated+"";
-				$scope.product = res;
 
-				loadStyles();
-				loadGenders();
-				loadSizes();
-				loadBrands();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/api/v1/product/update/" + id,
+				headers: {
+					"Authorization":$cookies.get("jwtToken")
+				},
+				success: function(res) {
+					res.type = res.type.id+"";
+					res.gender = res.gender.id+"";
+					res.brand = res.brand.id+"";
+					res.size = res.size+"";
+					res.activated = res.activated+"";
+					$scope.product = res;
+
+					loadStyles();
+					loadGenders();
+					loadSizes();
+					loadBrands();
+				}
 			});
 		}
 
@@ -148,8 +187,11 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 			if(valid) {
 				$.ajax({
 					method: "PUT",
-					url: CONSTANTS.SS_SERVER + "/api/v1/product/update/" + id, 
-					data: $scope.product, 
+					url: CONSTANTS.SS_SERVER + "/api/v1/product/update/" + id,
+					data: $scope.product,
+					headers: {
+						"Authorization":$cookies.get("jwtToken")
+					},
 					success: function(res) {
 						alert("Item updated suscessfully.");
 						location.reload();
@@ -163,23 +205,35 @@ app.controller("ProductController", function($scope, $window, $location, $sessio
 		}
 
 		function loadBrands() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-brands", function(res) {
-				$scope.brands = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-brands",
+				success: function(res) {
+					$scope.brands = res;
+					$scope.$digest();
+				}
 			});
 		}
 
 		function loadStyles() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-styles", function(res) {
-				$scope.styles = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-styles",
+				success: function(res) {
+					$scope.styles = res;
+					$scope.$digest();
+				}
 			});
 		}
 
 		function loadGenders() {
-			$.get(CONSTANTS.SS_SERVER + "/ajax-get-genders", function(res) {
-				$scope.genders = res;
-				$scope.$digest();
+			$.ajax({
+				method: "GET",
+				url: CONSTANTS.SS_SERVER + "/ajax-get-genders",
+				success: function(res) {
+					$scope.genders = res;
+					$scope.$digest();
+				}
 			});
 		}
 	}
